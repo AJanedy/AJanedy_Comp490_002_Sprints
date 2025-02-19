@@ -1,0 +1,43 @@
+# Base structure of this .yml file obtained from
+# https://github.com/actions/starter-workflows/blob/main/ci/python-app.yml
+
+name: Comp490_002 Sprints Workflow
+
+on:           # Run workflow
+  push:       # with every push
+    branches: # to branch(es)
+      - main  # - main
+
+jobs:                        # Creates a job
+  build:                     # named "build"
+    runs-on: ubuntu-latest   # that runs on the latest version of Ubuntu
+
+    steps:                        # Steps in the job
+    - name: Checkout code
+      uses: actions/checkout@v2   # use GitHub checkout action to clone the repository to the runner
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # Installs Python on the runner
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |                                  # Upgrades pip and installs dependencies
+        python -m pip install --upgrade pip  
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Set PYTHONPATH                              # Allows Python to find src module
+      run: echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
+                                                        # $GITHUB_ENV stores envir variables
+
+    - name: Run program
+      run: |
+        python src/ai_resume_builder/resume_generator.py  # Run resume_generator.py
+        python src/job_search_database/job_search_database_driver.py  # Run job_search_database_driver.py
+
+    - name: Run pylint
+      run: pylint src tests  # Run pylint on all .py files
+
+    - name: Run tests
+      run: |          # Run pytest on the tests directory
+        pytest tests  
