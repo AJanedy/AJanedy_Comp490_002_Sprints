@@ -1,0 +1,65 @@
+# Anthony Janedy
+617-633-5902 | AJanedy@gmail.com | [Your LinkedIn Profile URL (Optional)]
+
+
+## Summary
+
+Highly motivated and results-oriented IT professional with a proven track record of leadership and success in fast-paced environments.  Possessing a Bachelor's degree in Computer Science and extensive experience in restaurant management, I am seeking to transition my skills into a DevOps Platform Engineer role.  My strong technical foundation, coupled with my experience managing large teams and navigating complex challenges, makes me a highly suitable candidate for this position.  I am eager to leverage my abilities to contribute to Epic's success in building and maintaining a robust and reliable SaaS platform.
+
+
+## Skills
+
+**Technical Skills:**
+
+* **Programming Languages:** Python, Go, C++, Java, HTML
+* **Databases:** MySQL
+* **Version Control:** Git, GitHub
+* **DevOps Tools:**  (Highlight familiarity with these even if not extensive experience.  Focus on *willingness* to learn and apply)
+    * Kubernetes (Willingness to learn and apply)
+    * CI/CD Frameworks (GitLab CI – Willingness to learn and apply)
+    * Infrastructure as Code (Puppet, Terraform, Ansible – Willingness to learn and apply)
+* **Operating Systems:** Windows, Linux (Ubuntu)
+* **Other:** Data Structures & Algorithms, Unit Testing, Debugging Techniques
+
+
+**Soft Skills:**
+
+* Leadership & Team Management (8 years experience managing 30+ employees)
+* Deadline Management
+* Conflict Resolution
+* Multitasking & Adaptability
+* Problem-solving & Critical Thinking
+* Comfortable in High-Stress Environments
+
+
+## Experience
+
+**Restaurant Management  |  [Restaurant Name(s)]  | [Dates of Employment]**
+
+* Successfully managed a team of 30+ employees and 2 middle-level managers across multiple locations.
+* Consistently exceeded performance targets in revenue generation, cost control, and customer satisfaction.
+* Developed and implemented effective strategies for team training, motivation, and performance improvement.
+* Demonstrated exceptional problem-solving skills in handling unexpected challenges and resolving conflicts.
+* Effectively managed daily operations, including scheduling, inventory control, and financial reporting.
+
+
+## Education
+
+**Bachelor of Science in Computer Science  |  Bridgewater State University  |  [Graduation Date]**
+
+**Bachelor of Business Management  |  Ashford University  | [Graduation Date]**
+
+
+## Projects
+
+* **Movie Database (GitHub: [https://github.com/AJanedy/MovieDatabase](https://github.com/AJanedy/MovieDatabase))**: [Brief, impactful description of the project and technologies used – e.g., "Developed a web application for managing movie databases using Python and Django."]
+* **AJanedy_COMP490_002_Sprint_1 (GitHub: [https://github.com/AJanedy/AJanedy_COMP490_002_Sprint_1](https://github.com/AJanedy/AJanedy_COMP490_002_Sprint_1))**: [Brief, impactful description]
+* **Comp426_Project_1 (GitHub: [https://github.com/AJanedy/Comp426_Project_1](https://github.com/AJanedy/Comp426_Project_1))**: [Brief, impactful description]
+
+
+## Relocation
+
+Willing to relocate to Madison, WI.
+
+
+**Note:**  Replace bracketed information with your specific details.  Tailor the project descriptions to highlight relevant skills (e.g., mention use of specific technologies, problem-solving approaches, or team collaboration aspects) that align with the job description.  Consider adding a quantifiable achievement for each project and experience if possible (e.g., "Improved team efficiency by 15%").  Finally,  emphasize your *willingness to learn* the specific DevOps tools mentioned in the job description, even if you don't have direct experience with them.  This showcases adaptability and a proactive learning attitude.

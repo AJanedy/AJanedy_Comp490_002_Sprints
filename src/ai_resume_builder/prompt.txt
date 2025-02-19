@@ -1,0 +1,2 @@
+Given the job description and the information I have provided about myself, please write me a sample resume
+in markdown format that is specifically designed around my skills and the job description provided.

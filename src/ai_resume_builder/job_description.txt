@@ -1,0 +1,35 @@
+"DevOps Platform Engineer", "company": "Epic", "description": "Please note that this position is based on our campus
+in Madison, WI, and requires relocation to the area.  We recruit nationally and provide financial relocation assistance.
+We are seeking an exceptional early-career IT professional to join our multi-tenant Hosting team as a DevOps Engineer.
+As a DevOps Engineer on our Development Platform Team, you'll help shape the future of Epic's SaaS platform by
+designing, deploying, testing, automating, and evaluating our Development Platform Infrastructure.  You will create and
+collaborate on automation to analyze, maintain, and evolve our complex infrastructure while working across multiple
+teams on training and adoption of processes and tools. Apply your technical prowess and problem-solving skills to
+develop and maintain a robust, reliable, high-performance foundation for some of the largest healthcare organizations
+in the country to access our world-class software.  Explore all open Hosting positions here. Live affordably in a city
+known for its rising tech talent. Epic is located just outside Madison, Wisconsin, the second fastest growing market
+for tech talent in the United States and home to the state capital and the University of Wisconsin.  Madison, a city
+surrounded by water, has received accolades for being the greenest city in America (NerdWallet), the best city for
+renters (SmartAsset), the fittest city in America (Fitbit), and the third best metro in the US for young professionals
+(Forbes Advisor). More than just important work. Our uniquely themed campus was designed to heighten your ability to
+get stuff done in your office, a conference room, or by the fireplace in a comfy chair.  All meals are
+restaurant-quality but cost only a few dollars, and they\u2019re prepared by a team comprised of kitchen talent from
+restaurants around the country.  And, after five years here, you\u2019ll earn a four-week sabbatical anywhere in the
+world.  Staff have kayaked in Patagonia, attended a Beyonc\u00e9 concert in Ireland, built a library in Tanzania,
+and run a marathon in Antarctica. We offer comprehensive benefits to keep you healthy and happy as you grow in your
+life and career, and your merit-based compensation will reflect the impact your work has on the company and our
+customers.  You'll also be eligible for annual raises and bonuses, as well as stock grants, which give you an even
+greater stake in the success of Epic and our customers.  Healthcare is global, and building the best ideas from around
+the world into Epic software is a point of pride.  As an Equal Opportunity Employer, we know that inclusive teams
+design software that supports the delivery of quality care for all patients, so diversity, equity, and inclusion are
+written into our principles.  Please see our full non-discrimination statement at https://careers. epic. com/EEO.
+2022 Bachelor's Degree in CIS, IS, IT, or a related field2022 Relocation to Madison, WI (reimbursed)2022 Eligibility
+to work in the U. S.  without visa sponsorship2022 COVID-19 vaccination2022 Preferred experience/interest in one of
+the following areas:2022 Kubernetes Administration2022 CI/CD frameworks such as GitLab CI2022 Infrastructure as Code
+frameworks such as Puppet, Terraform, or Ansible2022 Experience with scripting and programming languages such as Go,
+Ruby, PythonAs a member of the Hosting team at Epic, you'll be responsible for the confidentiality, integrity, and
+availability of Epic Hosting.  Those responsibilities include::2022 Following policies and procedures and escalating
+when policies or procedures are not followed2022 Escalating potential security incidents and providing relevant
+information2022 Meeting all security responsibilities defined in policies and procedures"
+
+ 

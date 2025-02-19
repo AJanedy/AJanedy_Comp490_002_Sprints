@@ -1,0 +1,53 @@
+# Anthony Janedy
+617-633-5902 | AJanedy@gmail.com | [GitHub Profile](https://github.com/AJanedy)
+
+**Summary**
+
+Highly motivated and results-oriented professional with a diverse background encompassing 8 years of successful management experience and a strong foundation in computer science.  Seeking a DevOps Platform Engineer position at Epic leveraging my proven leadership abilities, technical skills in scripting, infrastructure automation, and software development, and proven ability to thrive in fast-paced environments.  Eager to contribute to the development and maintenance of robust, reliable, and high-performance infrastructure.  Relocation to Madison, WI is not an issue.
+
+**Skills**
+
+* **Programming Languages:** Python, Go, Java, C++, Ruby (familiar)
+* **Infrastructure as Code:**  (Seeking to learn Terraform, Ansible, Puppet)
+* **CI/CD:** (Seeking to learn GitLab CI)
+* **Containerization:** (Seeking to learn Kubernetes Administration)
+* **Databases:** MySQL
+* **Version Control:** Git, GitHub
+* **Operating Systems:** Windows, Linux (Ubuntu experience)
+* **Other:** Data Structures and Algorithms, Unit Testing, Debugging, HTML
+
+**Experience**
+
+**Restaurant Management  |  [Restaurant Name Redacted]  |  [City, State]  |  2015 - Present**
+
+* Managed a team of 30 employees and 2 middle-level managers, consistently exceeding performance goals.
+* Developed and implemented strategies to improve efficiency and profitability.
+* Resolved conflicts effectively and fostered a positive work environment.
+* Successfully managed multiple projects simultaneously under tight deadlines in a high-pressure environment.
+* Demonstrated strong leadership, communication, and problem-solving skills.
+
+
+**Education**
+
+**Bachelor of Science in Computer Science | Bridgewater State University | Bridgewater, MA | 2022**
+
+**Bachelor of Business Management | Ashford University | Clinton, IA | [Year of Graduation]**
+
+
+**Projects**
+
+* **Movie Database (Python):**  [https://github.com/AJanedy/MovieDatabase](https://github.com/AJanedy/MovieDatabase) - Developed a Python application demonstrating proficiency in database interaction, data structures, and object-oriented programming.
+* **COMP490 Project (details in description):** [https://github.com/AJanedy/AJanedy_COMP490_002_Sprint_1](https://github.com/AJanedy/AJanedy_COMP490_002_Sprint_1) – [brief description of project and accomplishments]
+* **COMP426 Project (details in description):** [https://github.com/AJanedy/Comp426_Project_1](https://github.com/AJanedy/Comp426_Project_1) – [brief description of project and accomplishments]
+
+
+**Awards and Recognition** (Optional - Add if applicable)
+
+
+**Clearances**
+
+* Eligible to work in the U.S. without visa sponsorship.
+* COVID-19 Vaccination
+
+
+**Note:** This resume highlights transferable skills from your restaurant management experience to the target DevOps role.  It also emphasizes your proactive approach to learning the specific technologies mentioned in the job description.  Remember to replace the bracketed information with your actual details and expand on your project descriptions to showcase your accomplishments more effectively.  Consider adding quantifiable results wherever possible.
