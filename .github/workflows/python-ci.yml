@@ -1,6 +1,3 @@
-# Base structure of this .yml file obtained from
-# https://github.com/actions/starter-workflows/blob/main/ci/python-app.yml
-
 name: Comp490_002 Sprints Workflow
 
 on:           # Run workflow
@@ -28,16 +25,17 @@ jobs:                        # Creates a job
 
     - name: Set PYTHONPATH                              # Allows Python to find src module
       run: echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
-                                                        # $GITHUB_ENV stores envir variables
+                                                        # $GITHUB_ENV stores env variables
 
     - name: Run program
       run: |
-        python src/ai_resume_builder/resume_generator.py  # Run resume_generator.py
-        python src/job_search_database/job_search_database_driver.py  # Run job_search_database_driver.py
+        python src/ai_resume_builder/resume_generator.py  # Run ai_resume_builder module
+        python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
 
     - name: Run pylint
-      run: pylint src tests  # Run pylint on all .py files
+      run: pylint src tests  # Run pylint on both src and tests directories
 
     - name: Run tests
       run: |          # Run pytest on the tests directory
-        pytest tests  
+        pytest tests/test_ai_resume_builder   # Run the tests specific to ai_resume_builder
+        pytest tests/test_job_search_database  # Run the tests specific to job_search_database
