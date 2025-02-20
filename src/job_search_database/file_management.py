@@ -30,6 +30,9 @@ def normalize_file(file: str, is_test: bool):
     :return normalized_file_path_obj: A path object representing the new
         file containing normalized data.
     """
+    source_file = None
+    normalized_file_path_obj = None
+
     if not is_test:
         # os.path.abspath() gets the absolute path of its argument
         # os.path.dirname() gets the directory of its argument
@@ -39,21 +42,20 @@ def normalize_file(file: str, is_test: bool):
 
         source_file = Path(os.path.join(json_folder, file))
         normalized_file_path_obj = Path(os.path.join(json_folder, build_path_object(source_file)))
-        read_and_write_files(source_file, normalized_file_path_obj)
-
-        return normalized_file_path_obj
 
     if is_test:
         # Get the absolute path to the root directory
-        root_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-        test_directory = os.path.join(root_directory, "tests", "test_job_search_database")
+        root_directory = os.path.dirname(os.path.dirname
+                                         (os.path.dirname(os.path.abspath(__file__))))
+        test_directory = os.path.join(
+            root_directory, "tests", "test_job_search_database")
 
         source_file = Path(os.path.join(test_directory, file))
         normalized_file_path_obj = Path(os.path.join(test_directory, build_path_object(source_file)))
 
-        read_and_write_files(source_file, normalized_file_path_obj)
+    read_and_write_files(source_file, normalized_file_path_obj)
 
-        return normalized_file_path_obj
+    return normalized_file_path_obj
 
 
 def read_and_write_files(input_file: Path, normalized_file_path_obj: Path):
