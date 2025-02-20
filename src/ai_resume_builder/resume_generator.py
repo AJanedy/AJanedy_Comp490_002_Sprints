@@ -7,9 +7,8 @@ resume construction.  The AI is given a predetermined prompt that
 includes a job posting, and is asked to build a resume for that job
 given the applicant's skills, education, and work experience.
 """
-
-import google.generativeai as genai
 import os
+import google.generativeai as genai
 
 FILENAMES = [
     "api_key",
@@ -65,6 +64,14 @@ def get_api_key():
 
 
 def get_next_resume_filename():
+    """
+    A method for dynamically naming the new file that will contain the next AI generated
+    resume response.  This method opens the directory of .txt files, creates a list of
+    the counts (files are named incrementally, [ai_generated_resume_1,
+    ai_generated_resume_2, ...3, ...4], then determines what the next file should be
+    called by finding the max value of the list.
+    :return:
+    """
     # Create a list of files in the resume directory
     existing_files = [file for file in os.listdir(RESUME_DIRECTORY)
                       # Directory should only have files starting with "ai_generated_resume"
