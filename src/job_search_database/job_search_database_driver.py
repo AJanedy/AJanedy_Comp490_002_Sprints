@@ -55,6 +55,9 @@ DATABASE_PATH = "job_listings.db"
 
 
 def launch_job_database():
+    """
+    Program entry
+    """
 
     for file_path in FILE_PATHS.values():
         normalized_files.append(normalize_file(file_path))
