@@ -38,13 +38,23 @@ jobs:                        # Creates a job
       run: |
         python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
 
-    - name: Run pylint
+    - name: Run pylint on ai_resume_builder
       run: |
-        #        export PYTHONPATH=$(pwd)/src  # Set PYTHONPATH explicitly for pylint
-        # pylint src tests  # Run pylint on both src and tests directories
-        pylint ai_resume_builder job_search_database tests
-        env:
-          PYTHONPATH: $(pwd)/src
+        pylint src/ai_resume_builder  # Run pylint on ai_resume_builder directory
+      env:
+        PYTHONPATH: $(pwd)/src/job_search_database  # Set PYTHONPATH explicitly for pylint
+
+    - name: Run pylint on job_search_database
+      run: |
+        pylint src/job_search_database  # Run pylint on job_search_database directory
+      env:
+        PYTHONPATH: $(pwd)/src/job_search_database  # Set PYTHONPATH explicitly for pylint
+
+    - name: Run pylint on tests
+      run: |
+        pylint tests  # Run pylint on tests directory
+      env:
+        PYTHONPATH: $(pwd)/src/job_search_database  # Set PYTHONPATH explicitly for pylint
 
     - name: Run tests
       run: |          # Run pytest on the tests directory
