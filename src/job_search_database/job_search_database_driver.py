@@ -63,14 +63,14 @@ def launch_job_database():
     """
 
     for file_path in FILE_PATHS.values():
-        normalized_files.append(normalize_file(file_path))
+        normalized_files.append(normalize_file(file_path, False))
 
     # Prints shared and unique keys after initial normalization
     # Can be used for further comparison and normalization of data
     compare_keys(normalized_files)
 
     create_database(DATABASE_PATH)
-    populate_database(DATABASE_PATH, normalized_files)
+    populate_database(DATABASE_PATH, normalized_files, False)
 
 
 if __name__ == "__main__":

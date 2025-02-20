@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import TextIO
 
 
-def normalize_file(file: str):
+def normalize_file(file: str, is_test: bool):
     """
     Normalizes each file of JSON objects into a standardized data structure
 
@@ -25,23 +25,35 @@ def normalize_file(file: str):
     method to read in the original file and convert it to a normalized
     format, so it can be written to the new file.
 
+    :param is_test:
     :param file: The name of a json file (as string) containing job listings
     :return normalized_file_path_obj: A path object representing the new
         file containing normalized data.
     """
-    # os.path.abspath() gets the absolute path of its argument
-    # os.path.dirname() gets the directory of its argument
-    # __file__ is a built-in variable representing the path of the current script
-    project_root = os.path.abspath(os.path.dirname(__file__))
-    json_folder = os.path.join(project_root, "json_files")
+    if not is_test:
+        # os.path.abspath() gets the absolute path of its argument
+        # os.path.dirname() gets the directory of its argument
+        # __file__ is a built-in variable representing the path of the current script
+        project_directory = os.path.abspath(os.path.dirname(__file__))
+        json_folder = os.path.join(project_directory, "json_files")
 
-    # print(f"Normalizing file: {file}")
-    source_file = Path(os.path.join(json_folder, file))
-    normalized_file_path_obj = Path(os.path.join(json_folder, build_path_object(source_file)))
-    read_and_write_files(source_file, normalized_file_path_obj)
-    # print(f"{file} normalized.  Normalized data saved to {normalized_file_path_obj.name}")
+        source_file = Path(os.path.join(json_folder, file))
+        normalized_file_path_obj = Path(os.path.join(json_folder, build_path_object(source_file)))
+        read_and_write_files(source_file, normalized_file_path_obj)
 
-    return normalized_file_path_obj
+        return normalized_file_path_obj
+
+    if is_test:
+        # Get the absolute path to the root directory
+        root_directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        test_directory = os.path.join(root_directory, "tests", "test_job_search_database")
+
+        source_file = Path(os.path.join(test_directory, file))
+        normalized_file_path_obj = Path(os.path.join(test_directory, build_path_object(source_file)))
+
+        read_and_write_files(source_file, normalized_file_path_obj)
+
+        return normalized_file_path_obj
 
 
 def read_and_write_files(input_file: Path, normalized_file_path_obj: Path):

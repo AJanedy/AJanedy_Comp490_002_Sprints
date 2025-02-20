@@ -9,6 +9,11 @@ from pathlib import Path
 from src.job_search_database.file_management import build_path_object, normalize_file
 from src.job_search_database.database_management import create_database, populate_database
 
+# Get directory of the script with os.path.dirname(__file__)
+# Converts path to an absolute path with os.path.abspath()
+test_directory = os.path.join(os.path.abspath(os.path.dirname(__file__)))
+root_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
 
 def test_1_build_path_object():
     """Test that build_path_object() correctly renames a file"""
@@ -29,12 +34,9 @@ def test_2_normalize_file():
     The test concludes by deleting the file created for testing, then
     tests to ensure that the file has been deleted.
     """
-    # Get directory of the script with os.path.dirname(__file__)
-    # Converts path to an absolute path with os.path.abspath()
-    project_root = os.path.abspath(os.path.dirname(__file__))
 
-    source_file = Path(os.path.join(project_root, "json_list_test_file.json"))
-    expected_new_file = Path("json_list_test_file_normalized.json")
+    source_file = Path(os.path.join(test_directory, "json_list_test_file.json"))
+    expected_new_file = Path(os.path.join(test_directory, Path("json_list_test_file_normalized.json")))
     expected_new_file_line_count = 10
 
     # Logic for suppressing the print statements of the method
@@ -45,7 +47,7 @@ def test_2_normalize_file():
     # normally printed to the console is effectively discarded.
     with open(os.devnull, 'w', encoding='utf-8') as trash_file, redirect_stdout(trash_file):
         # Ensure normalize_file returns the expected path object
-        assert normalize_file(source_file) == expected_new_file
+        assert normalize_file(source_file.name, True).name == expected_new_file.name
 
     # Ensure that a file has been created using that Path name
     assert expected_new_file.exists()
@@ -125,7 +127,7 @@ def test_4_populate_database():
         the database with the fixed test data.
     """
     test_database = "test_database.db"
-    json_files = [Path("json_list_test_file_normalized.json")]
+    json_files = [Path(os.path.join(test_directory, "json_list_test_file_normalized.json"))]
 
     # Logic for suppressing the print statements of the method
     # being tested obtained from Google Gemini AI.  os.devnull
@@ -175,10 +177,10 @@ def test_5_file_and_database_deletion():
     A method to delete the files created during the testing process
     :return:
     """
-    test_file = Path("json_list_test_file_normalized.json")
+    test_file = Path(os.path.join(test_directory, "json_list_test_file_normalized.json"))
     test_file.unlink()  # Delete the file
     assert not test_file.exists()  # Ensure file has been deleted
 
-    test_database = Path("test_database.db")
+    test_database = Path(os.path.join(root_directory, "test_database.db"))
     test_database.unlink()
     assert not test_database.exists()
