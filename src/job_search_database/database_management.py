@@ -31,8 +31,6 @@ def create_database(database_path: str):
     :param database_path:
     :return:
     """
-    print(f"\nCreating database {database_path}")
-
     try:
         connection = sqlite3.connect(database_path)
         cursor = connection.cursor()
@@ -45,8 +43,6 @@ def create_database(database_path: str):
 
     except sqlite3.Error as error:
         print(f"Database error: {error}")
-
-    print(f"{database_path} created.")
 
 
 def create_shared_table(cursor: Cursor):
@@ -121,8 +117,6 @@ def populate_database(database_path: str, source_files: list):
     :param source_files: list of files containing json objects
     :return:
     """
-    print(f"Populating {database_path}")
-
     try:
         connection = sqlite3.connect(database_path)
         cursor = connection.cursor()
@@ -132,7 +126,7 @@ def populate_database(database_path: str, source_files: list):
                 for line in source_file:
                     json_object = json.loads(line)
                     populate_shared_table(cursor, json_object)
-                    if file.filename == "rapid_results_normalized.json":
+                    if file.name == "rapid_results_normalized.json":
                         populate_rapid_results_unique_table(cursor, json_object)
 
         connection.commit()
@@ -140,8 +134,6 @@ def populate_database(database_path: str, source_files: list):
 
     except sqlite3.Error as error:
         print(f"Database error: {error}")
-
-    print(f"{database_path} populated.")
 
 
 def populate_shared_table(cursor: Cursor, json_object: dict):

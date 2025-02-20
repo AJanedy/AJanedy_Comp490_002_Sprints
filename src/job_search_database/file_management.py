@@ -33,12 +33,13 @@ def normalize_file(file: str):
     # os.path.dirname() gets the directory of its argument
     # __file__ is a built-in variable representing the path of the current script
     project_root = os.path.abspath(os.path.dirname(__file__))
+    json_folder = os.path.join(project_root, "json_files")
 
-    print(f"Normalizing file: {file}")
-    source_file = Path(os.path.join(project_root, file))
-    normalized_file_path_obj = build_path_object(source_file)
+    # print(f"Normalizing file: {file}")
+    source_file = Path(os.path.join(json_folder, file))
+    normalized_file_path_obj = Path(os.path.join(json_folder, build_path_object(source_file)))
     read_and_write_files(source_file, normalized_file_path_obj)
-    print(f"{file} normalized.  Normalized data saved to {normalized_file_path_obj.name}")
+    # print(f"{file} normalized.  Normalized data saved to {normalized_file_path_obj.name}")
 
     return normalized_file_path_obj
 

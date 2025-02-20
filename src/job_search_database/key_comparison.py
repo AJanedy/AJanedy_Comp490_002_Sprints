@@ -26,16 +26,19 @@ def compare_keys(files: list):
     :param files: A list of json files
     :return:
     """
-    print("\nComparing json keys:")
     json_keys = extract_keys(files)  # Dictionary: {"source_json_file": set[json_keys]}
     keys_list = list(json_keys.values())  # List[set[json_keys]] extracted from dictionary
     shared_keys = set.intersection(*keys_list)  # Set of keys shared between all json files
 
-    print(f"\nShared Keys: {shared_keys}")
-    print("\nUnique Keys: ")
-    for key, values in json_keys.items():
-        unique_keys = values - shared_keys
-        print(f"\t{key}: {unique_keys}")
+    """
+    THIS CODE IS USED TO COMPARE KEYS FOR NORMALIZATION OF FILES
+    AND CAN BE UNCOMMENTED FOR FURTHER ADJUSTMENTS
+    """
+    # print(f"\nShared Keys: {shared_keys}")
+    # print("\nUnique Keys: ")
+    # for key, values in json_keys.items():
+    #     unique_keys = values - shared_keys
+    #     print(f"\t{key}: {unique_keys}")
 
 
 def extract_keys(files: list):
@@ -53,8 +56,8 @@ def extract_keys(files: list):
     object_keys: dict[str, set[str]] = {}  # Dictionary to store sets of keys
 
     for file in files:
-        object_keys[file.filename] = set()  # Create a new set for each file in dictionary
-        build_json_key_set(file, object_keys)  # Add each unique key to the set
+        object_keys[file.name] = set()  # Create a new set for each file in dictionary
+        build_json_key_set(Path(file), object_keys)  # Add each unique key to the set
 
     return object_keys
 
@@ -73,7 +76,7 @@ def build_json_key_set(file: Path, object_keys: dict):
         :return:
         """
     try:
-        with open(str(file), "r", encoding="utf-8") as source_file:
+        with open(file, "r", encoding="utf-8") as source_file:
             for line in source_file:
                 line = line.strip()
                 try:

@@ -19,7 +19,8 @@ FILENAMES = [
 ]
 
 script_directory = os.path.dirname(os.path.abspath(__file__))
-FILE_PATHS = {filename: os.path.join(script_directory, f"{filename}.txt") for filename in FILENAMES}
+file_directory = os.path.join(script_directory, "source_text_files")
+FILE_PATHS = {filename: os.path.join(file_directory, f"{filename}.txt") for filename in FILENAMES}
 
 RESUME_DIRECTORY = os.path.join(script_directory, "resumes")
 

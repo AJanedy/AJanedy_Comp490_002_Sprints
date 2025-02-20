@@ -35,14 +35,19 @@ Finally, the previously created database is populated with the data
 from each json file.  This process begins with the populate_database()
 method found in database_management.py.
 """
+import os
 from database_management import create_database, populate_database
 from file_management import normalize_file
 from key_comparison import compare_keys
 
-FILES = [
-    "rapid_jobs2.json",
-    "rapid_results.json"
+FILENAMES = [
+    "rapid_jobs2",
+    "rapid_results"
 ]
+
+SCRIPT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+FILE_DIRECTORY = os.path.join(SCRIPT_DIRECTORY, "json_files")
+FILE_PATHS = {filename: os.path.join(FILE_DIRECTORY, f"{filename}.json") for filename in FILENAMES}
 
 normalized_files = []
 
@@ -51,8 +56,8 @@ DATABASE_PATH = "job_listings.db"
 
 def launch_job_database():
 
-    for file in FILES:
-        normalized_files.append(normalize_file(file))
+    for file_path in FILE_PATHS.values():
+        normalized_files.append(normalize_file(file_path))
 
     # Prints shared and unique keys after initial normalization
     # Can be used for further comparison and normalization of data
@@ -64,4 +69,3 @@ def launch_job_database():
 
 if __name__ == "__main__":
     launch_job_database()
-    
