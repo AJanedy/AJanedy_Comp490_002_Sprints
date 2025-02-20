@@ -1,65 +1,53 @@
-# Anthony Janedy
-617-633-5902 | AJanedy@gmail.com | [Your LinkedIn Profile URL (Optional)]
+# Alexander Janedy
+617-633-5902 | AJanedy@gmail.com | [LinkedIn Profile URL (Optional)]
 
 
-## Summary
+**Summary**
 
-Highly motivated and results-oriented IT professional with a proven track record of leadership and success in fast-paced environments.  Possessing a Bachelor's degree in Computer Science and extensive experience in restaurant management, I am seeking to transition my skills into a DevOps Platform Engineer role.  My strong technical foundation, coupled with my experience managing large teams and navigating complex challenges, makes me a highly suitable candidate for this position.  I am eager to leverage my abilities to contribute to Epic's success in building and maintaining a robust and reliable SaaS platform.
+Highly motivated and results-oriented professional with 8 years of experience managing teams of up to 30 individuals in fast-paced environments.  Seeking a DevOps Platform Engineer position at Epic, leveraging strong leadership skills and a proven ability to adapt to challenging situations, combined with a growing proficiency in software development and infrastructure technologies.  Possessing a Bachelor's degree in Computer Science and a demonstrated interest in Kubernetes, CI/CD, and Infrastructure as Code.
 
 
-## Skills
-
-**Technical Skills:**
+**Skills**
 
 * **Programming Languages:** Python, Go, C++, Java, HTML
 * **Databases:** MySQL
 * **Version Control:** Git, GitHub
-* **DevOps Tools:**  (Highlight familiarity with these even if not extensive experience.  Focus on *willingness* to learn and apply)
-    * Kubernetes (Willingness to learn and apply)
-    * CI/CD Frameworks (GitLab CI – Willingness to learn and apply)
-    * Infrastructure as Code (Puppet, Terraform, Ansible – Willingness to learn and apply)
+* **DevOps Tools:**  (Highlight familiarity, even if limited)  Kubernetes (interest/learning in progress), GitLab CI (interest/learning in progress), Terraform/Puppet/Ansible (interest/learning in progress)
 * **Operating Systems:** Windows, Linux (Ubuntu)
-* **Other:** Data Structures & Algorithms, Unit Testing, Debugging Techniques
+* **Software Development:** Data structures and algorithms, unit testing, debugging
+* **Leadership & Management:** Team management (8 years experience), deadline management, conflict resolution, multitasking, adaptability, flexibility
+* **Other:**  Excellent problem-solving skills, comfortable in high-pressure environments
 
 
-**Soft Skills:**
+**Experience**
 
-* Leadership & Team Management (8 years experience managing 30+ employees)
-* Deadline Management
-* Conflict Resolution
-* Multitasking & Adaptability
-* Problem-solving & Critical Thinking
-* Comfortable in High-Stress Environments
+**Restaurant Management  | [Restaurant Name] | [City, State] | 2015 - Present**
 
-
-## Experience
-
-**Restaurant Management  |  [Restaurant Name(s)]  | [Dates of Employment]**
-
-* Successfully managed a team of 30+ employees and 2 middle-level managers across multiple locations.
-* Consistently exceeded performance targets in revenue generation, cost control, and customer satisfaction.
-* Developed and implemented effective strategies for team training, motivation, and performance improvement.
-* Demonstrated exceptional problem-solving skills in handling unexpected challenges and resolving conflicts.
-* Effectively managed daily operations, including scheduling, inventory control, and financial reporting.
+* Managed teams of 20-30 employees and 2 middle-level managers across multiple shifts.
+* Successfully navigated high-stress situations, consistently meeting deadlines and exceeding performance goals.
+* Implemented [mention any relevant accomplishments - process improvements, cost savings, etc.]
+* Resolved conflicts effectively, fostering a positive and productive work environment.
+* Demonstrated adaptability and flexibility in response to changing customer demands and operational challenges.
 
 
-## Education
+**Education**
 
-**Bachelor of Science in Computer Science  |  Bridgewater State University  |  [Graduation Date]**
+**Bachelor of Science, Computer Science | Bridgewater State University | [City, State] | 2022**
 
-**Bachelor of Business Management  |  Ashford University  | [Graduation Date]**
-
-
-## Projects
-
-* **Movie Database (GitHub: [https://github.com/AJanedy/MovieDatabase](https://github.com/AJanedy/MovieDatabase))**: [Brief, impactful description of the project and technologies used – e.g., "Developed a web application for managing movie databases using Python and Django."]
-* **AJanedy_COMP490_002_Sprint_1 (GitHub: [https://github.com/AJanedy/AJanedy_COMP490_002_Sprint_1](https://github.com/AJanedy/AJanedy_COMP490_002_Sprint_1))**: [Brief, impactful description]
-* **Comp426_Project_1 (GitHub: [https://github.com/AJanedy/Comp426_Project_1](https://github.com/AJanedy/Comp426_Project_1))**: [Brief, impactful description]
+**Bachelor of Arts, Business Management | Ashford University | [City, State] | [Year of Graduation]**
 
 
-## Relocation
+**Projects**
 
-Willing to relocate to Madison, WI.
+* **Movie Database (GitHub: [https://github.com/AJanedy/MovieDatabase](https://github.com/AJanedy/MovieDatabase))**:  [Brief, impactful description of the project, highlighting relevant skills used.  E.g., "Developed a web application for managing movie data using Python and MySQL, demonstrating proficiency in database design and backend development."]
+* **AJanedy_COMP490_002_Sprint_1 (GitHub: [https://github.com/AJanedy/AJanedy_COMP490_002_Sprint_1](https://github.com/AJanedy/AJanedy_COMP490_002_Sprint_1))**: [Brief description, highlighting relevant skills.]
+* **Comp426_Project_1 (GitHub: [https://github.com/AJanedy/Comp426_Project_1](https://github.com/AJanedy/Comp426_Project_1))**: [Brief description, highlighting relevant skills.]
 
 
-**Note:**  Replace bracketed information with your specific details.  Tailor the project descriptions to highlight relevant skills (e.g., mention use of specific technologies, problem-solving approaches, or team collaboration aspects) that align with the job description.  Consider adding a quantifiable achievement for each project and experience if possible (e.g., "Improved team efficiency by 15%").  Finally,  emphasize your *willingness to learn* the specific DevOps tools mentioned in the job description, even if you don't have direct experience with them.  This showcases adaptability and a proactive learning attitude.
+**Awards and Recognition (Optional)**
+
+
+**Clearance (Optional - If applicable)**
+
+
+**Note:**  This resume emphasizes your transferable skills and aligns them with the requirements of the DevOps Platform Engineer role.  You should tailor the descriptions of your projects to highlight skills directly relevant to the job description (e.g., automation, infrastructure management, scripting).  Consider adding a LinkedIn profile URL for enhanced visibility.  Quantify your accomplishments whenever possible (e.g., "Increased efficiency by 15% through implementation of X").  Finally, actively pursue learning opportunities in the areas (Kubernetes, CI/CD, IaC) specifically mentioned as preferred experience to strengthen your application.

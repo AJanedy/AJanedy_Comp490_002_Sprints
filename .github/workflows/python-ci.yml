@@ -9,6 +9,9 @@ jobs:                        # Creates a job
   build:                     # named "build"
     runs-on: ubuntu-latest   # that runs on the latest version of Ubuntu
 
+    env:
+      API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable
+
     steps:                        # Steps in the job
     - name: Checkout code
       uses: actions/checkout@v2   # use GitHub checkout action to clone the repository to the runner
@@ -27,9 +30,12 @@ jobs:                        # Creates a job
       run: echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
                                                         # $GITHUB_ENV stores env variables
 
-    - name: Run program
+    - name: Run ai_resume_builder
       run: |
         python src/ai_resume_builder/resume_generator.py  # Run ai_resume_builder module
+
+    - name: Run job_search_database
+      run: |
         python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
 
     - name: Run pylint
@@ -39,3 +45,5 @@ jobs:                        # Creates a job
       run: |          # Run pytest on the tests directory
         pytest tests/test_ai_resume_builder   # Run the tests specific to ai_resume_builder
         pytest tests/test_job_search_database  # Run the tests specific to job_search_database
+      env:
+        API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable

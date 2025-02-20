@@ -1,4 +1,5 @@
 import google.generativeai as genai
+import os
 
 FILES = {
     "api_key": "api_key.txt",
@@ -23,8 +24,17 @@ def write_to_file(filename, resume):
         file.write(resume)
 
 
+def get_api_key():
+    api_key = os.environ.get("API_KEY")  # Get API key from environment variable
+    if not api_key:
+        api_key = read_file(FILES["api_key"])
+    return api_key
+
+
 def generate_resume():
-    api_key = read_file(FILES["api_key"])
+
+    api_key = get_api_key()
+
     job_description = read_file(FILES["job_description"])
     skills = read_file(FILES["skills"])
     prompt = read_file(FILES["prompt"])
