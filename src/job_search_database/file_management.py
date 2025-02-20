@@ -51,7 +51,8 @@ def normalize_file(file: str, is_test: bool):
             root_directory, "tests", "test_job_search_database")
 
         source_file = Path(os.path.join(test_directory, file))
-        normalized_file_path_obj = Path(os.path.join(test_directory, build_path_object(source_file)))
+        normalized_file_path_obj = Path(os.path.join
+                                        (test_directory, build_path_object(source_file)))
 
     read_and_write_files(source_file, normalized_file_path_obj)
 

@@ -181,6 +181,11 @@ def test_5_file_and_database_deletion():
     test_file.unlink()  # Delete the file
     assert not test_file.exists()  # Ensure file has been deleted
 
+    test_database = Path(os.path.join(test_directory, "test_database.db"))
+    if test_database.exists():
+        test_database.unlink()
+        assert not test_database.exists()
     test_database = Path(os.path.join(root_directory, "test_database.db"))
-    test_database.unlink()
-    assert not test_database.exists()
+    if test_database.exists():
+        test_database.unlink()
+        assert not test_database.exists()
