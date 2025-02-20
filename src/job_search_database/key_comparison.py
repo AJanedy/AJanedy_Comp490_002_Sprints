@@ -30,15 +30,11 @@ def compare_keys(files: list):
     keys_list = list(json_keys.values())  # List[set[json_keys]] extracted from dictionary
     shared_keys = set.intersection(*keys_list)  # Set of keys shared between all json files
 
-    """
-    THIS CODE IS USED TO COMPARE KEYS FOR NORMALIZATION OF FILES
-    AND CAN BE UNCOMMENTED FOR FURTHER ADJUSTMENTS
-    """
-    # print(f"\nShared Keys: {shared_keys}")
-    # print("\nUnique Keys: ")
-    # for key, values in json_keys.items():
-    #     unique_keys = values - shared_keys
-    #     print(f"\t{key}: {unique_keys}")
+    print(f"\nShared Keys: {shared_keys}")
+    print("\nUnique Keys: ")
+    for key, values in json_keys.items():
+        unique_keys = values - shared_keys
+        print(f"\t{key}: {unique_keys}")
 
 
 def extract_keys(files: list):
