@@ -40,7 +40,7 @@ jobs:                        # Creates a job
 
     - name: Run pylint
       run: |
-#        export PYTHONPATH=$(pwd)/src  # Set PYTHONPATH explicitly for pylint
+        #        export PYTHONPATH=$(pwd)/src  # Set PYTHONPATH explicitly for pylint
         pylint src tests  # Run pylint on both src and tests directories
       env:
         PYTHONPATH: $(pwd)/src
