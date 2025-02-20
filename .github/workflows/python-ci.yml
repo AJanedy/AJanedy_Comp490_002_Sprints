@@ -48,7 +48,7 @@ jobs:                        # Creates a job
       run: |
         pylint src/job_search_database  # Run pylint on job_search_database directory
       env:
-        PYTHONPATH: $(pwd)/src/job_search_database  # Set PYTHONPATH explicitly for pylint
+        PYTHONPATH: $(pwd)/src  # Set PYTHONPATH explicitly for pylint
 
     - name: Run pylint on tests
       run: |
