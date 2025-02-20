@@ -53,7 +53,7 @@ def extract_keys(files: list):
     object_keys: dict[str, set[str]] = {}  # Dictionary to store sets of keys
 
     for file in files:
-        object_keys[file.name] = set()  # Create a new set for each file in dictionary
+        object_keys[file.filename] = set()  # Create a new set for each file in dictionary
         build_json_key_set(file, object_keys)  # Add each unique key to the set
 
     return object_keys

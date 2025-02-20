@@ -132,7 +132,7 @@ def populate_database(database_path: str, source_files: list):
                 for line in source_file:
                     json_object = json.loads(line)
                     populate_shared_table(cursor, json_object)
-                    if file.name == "rapid_results_normalized.json":
+                    if file.filename == "rapid_results_normalized.json":
                         populate_rapid_results_unique_table(cursor, json_object)
 
         connection.commit()
