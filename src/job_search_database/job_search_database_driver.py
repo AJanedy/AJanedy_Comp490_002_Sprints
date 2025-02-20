@@ -36,12 +36,10 @@ from each json file.  This process begins with the populate_database()
 method found in database_management.py.
 """
 import os
-from src.job_search_database.database_management import create_database, populate_database
-from src.job_search_database.file_management import normalize_file
-from src.job_search_database.key_comparison import compare_keys
-# from database_management import create_database, populate_database
-# from file_management import normalize_file
-# from key_comparison import compare_keys
+from database_management import create_database, populate_database
+from file_management import normalize_file
+from key_comparison import compare_keys
+
 
 FILENAMES = [
     "rapid_jobs2",
@@ -70,7 +68,7 @@ def launch_job_database():
     compare_keys(normalized_files)
 
     create_database(DATABASE_PATH)
-    populate_database(DATABASE_PATH, normalized_files, False)
+    populate_database(DATABASE_PATH, normalized_files)
 
 
 if __name__ == "__main__":
