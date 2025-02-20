@@ -43,8 +43,8 @@ jobs:                        # Creates a job
         #        export PYTHONPATH=$(pwd)/src  # Set PYTHONPATH explicitly for pylint
         # pylint src tests  # Run pylint on both src and tests directories
         pylint ai_resume_builder job_search_database tests
-      env:
-        PYTHONPATH: $(pwd)/src
+        #      env:
+        #        PYTHONPATH: $(pwd)/src
 
     - name: Run tests
       run: |          # Run pytest on the tests directory
