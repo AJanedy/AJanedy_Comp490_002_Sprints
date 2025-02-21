@@ -44,7 +44,7 @@ jobs:                        # Creates a job
         echo "Python Path: $PYTHONPATH"
         pylint src/ai_resume_builder  # Run pylint on ai_resume_builder directory
       env:
-        PYTHONPATH: $(pwd)/src/ai_resume_builder  # Set PYTHONPATH explicitly for pylint
+        PYTHONPATH: $(pwd)/src  # Set PYTHONPATH explicitly for pylint
 
     - name: Run pylint on job_search_database
       run: |
@@ -52,7 +52,7 @@ jobs:                        # Creates a job
         echo "Python Path: $PYTHONPATH"
         pylint src/job_search_database  # Run pylint on job_search_database directory
       env:
-        PYTHONPATH: $(pwd)/src/job_search_database  # Set PYTHONPATH explicitly for pylint
+        PYTHONPATH: $(pwd)/src  # Set PYTHONPATH explicitly for pylint
 
     - name: Run pylint on tests
       run: |
