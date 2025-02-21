@@ -52,6 +52,7 @@ jobs:                        # Creates a job
       run: |
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
+        echo "GITHUB_ENV: $GITHUB_ENV
         pylint job_search_database  # Run pylint on job_search_database directory
       working-directory: src
       env:
