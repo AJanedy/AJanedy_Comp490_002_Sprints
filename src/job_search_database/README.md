@@ -10,18 +10,27 @@ locally.
 ===============================================================================
 FOR WINDOWS
 
-To run program in command line or gitbash, navigate to src folder 
-within root directory of this project, then simply run command:
+To run program in command line, powershell, or gitbash, navigate to the root 
+directory of the project (AJanedy_Comp490_002_Sprints), set your PYTHONPATH 
+to the root directory:
 
-python main.py
+    set PYTHONPATH=%cd%
+
+then run:
+
+    python src\job_search_database\job_search_database.py
 
 ===============================================================================
 FOR LINUX
 
-To run program in linux shell, navigate to src folder 
-within root directory of this project, then simply run command:
+To run program in linux shell, navigate to the root directory of the project
+(AJanedy_Comp490_002_Sprints), set your PYTHONPATH to the root directory:
+    
+    export PYTHONPATH=$(pwd)
 
-python3 main.py
+then run:
+
+    python3 src/job_search_database/job_search_database.py
 
 ===============================================================================
 
