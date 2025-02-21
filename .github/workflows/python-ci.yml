@@ -43,9 +43,9 @@ jobs:                        # Creates a job
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pylint ai_resume_builder  # Run pylint on ai_resume_builder directory
-      working-directory: src
-      env:
-        PYTHONPATH: $(pwd)/src  # Ensure pylint can find src/ai_resume_builder
+#      working-directory: src
+#      env:
+#        PYTHONPATH: $(pwd)/src  # Ensure pylint can find src/ai_resume_builder
 
 
     - name: Run pylint on job_search_database
