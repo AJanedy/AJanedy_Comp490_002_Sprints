@@ -43,7 +43,7 @@ jobs:                        # Creates a job
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pylint ai_resume_builder  # Run pylint on ai_resume_builder directory
-      working-directory: src/ai_resume_builder
+      working-directory: src
       env:
         PYTHONPATH: $(pwd)/src  # Ensure pylint can find src/ai_resume_builder
 
@@ -53,7 +53,7 @@ jobs:                        # Creates a job
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pylint job_search_database  # Run pylint on job_search_database directory
-      working-directory: src/job_search_database
+      working-directory: src
       env:
         PYTHONPATH: $(pwd)/src  # Ensure pylint can find src/job_search_database
 
