@@ -52,7 +52,7 @@ jobs:                        # Creates a job
       run: |
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
-        pylint job_search_database  # Run pylint on job_search_database directory
+        pylint src/job_search_database  # Run pylint on job_search_database directory
       working-directory: /
       env:
         PYTHONPATH: $(pwd)/src  # Ensure pylint can find src/job_search_database
