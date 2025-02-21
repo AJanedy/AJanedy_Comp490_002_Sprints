@@ -8,6 +8,8 @@ This program requires an API key.  It must be saved into the api_key.txt file fo
 is not provided on GitHub, as such the api_key.txt file will be empty.  A user must procure their own key
 or have it be provided via a private channel, and copy it into api_key.txt.
 
+Special note: A pre-commit hook has been added to api_key.txt; changes to this file cannot be committed.
+
 =======================================================================================================================
 
 To run the program, navigate to the root folder in command line, terminal, gitbash, or shell.  To run, use command
