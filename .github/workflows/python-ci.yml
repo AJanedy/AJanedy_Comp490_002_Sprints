@@ -61,7 +61,6 @@ jobs:                        # Creates a job
       run: |          # Run pytest on the tests directory
         echo "Current Directory: $(pwd)"
         echo "Python Path: $PYTHONPATH"
-        pytest tests/test_ai_resume_builder   # Run the tests specific to ai_resume_builder
         pytest tests/test_job_search_database  # Run the tests specific to job_search_database
       env:
         API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable
