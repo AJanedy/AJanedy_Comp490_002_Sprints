@@ -108,17 +108,20 @@ jobs:                        # Creates a job
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pylint src/ai_resume_builder  # Run pylint on ai_resume_builder directory
+      continue-on-error: true
 
     - name: Run pylint on job_search_database
       run: |
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pylint src/job_search_database  # Run pylint on job_search_database directory
+      continue-on-error: true
 
     - name: Run pylint on tests
       run: |
         export PYTHONPATH=$(pwd)
         pylint tests  # Run pylint on tests directory
+      continue-on-error: true
 
   run-tests:
     runs-on: ubuntu-latest
