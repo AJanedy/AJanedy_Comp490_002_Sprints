@@ -4,18 +4,21 @@ To use this program, Python 3.6 or higher and google-generativeai need to be ins
 
 =======================================================================================================================
 
-This program requires an API key.  It must be saved into the api_key.txt file for the program to work.  This key
-is not provided on GitHub, as such the api_key.txt file will be empty.  A user must procure their own key
-or have it be provided via a private channel, and copy it into api_key.txt.
+This program requires a Google generative-ai API key.  It must be saved into the api_key.txt file for the 
+program to work.  This key is not provided on GitHub, as such the api_key.txt file will be empty.  A user 
+must procure their own key or have it be provided via a private channel, and either copy it into api_key.txt, 
+or alternatively, before running the program in command line, create an environment variable and set it equal 
+to the API key.
 
 Special note: A pre-commit hook has been added to api_key.txt; changes to this file cannot be committed.
 
 =======================================================================================================================
 
-To run the program, navigate to the root folder in command line, terminal, gitbash, or shell.  To run, use command
-"python main.py" or "python3 main.py" depending on your chosen platform, the program should return a resume based 
-on the provided job description, user qualifications, and prompt for the AI platform.  All of those files are provided 
-in the respective .txt files.  
+To run the program, navigate to the root folder in command line, terminal, gitbash, or shell.  Run command
+"python src\ai_resume_builder\resume_generator.py" or "python3 src/ai_resume_builder/resume_generator.py", 
+depending on your chosen platform, the program should return a resume based on the provided job description, 
+user qualifications, and prompt for the AI platform.  All of those files are provided in the respective .txt files. 
+New resumes will be dynamically named and added to the resumes directory in ai_resume_builder.
 
 =======================================================================================================================
 
