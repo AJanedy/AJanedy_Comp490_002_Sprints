@@ -10,17 +10,20 @@ given the applicant's skills, education, and work experience.
 import os
 import google.generativeai as genai
 
-FILENAMES = [
-    "api_key",
-    "job_description",
-    "skills",
-    "prompt",
-]
-
+files = {
+    "API_KEY": "api_key.txt",
+    "JOB_DESCRIPTION": "job_description.txt",
+    "SKILLS": "skills.txt",
+    "PROMPT": "prompt.txt"
+}
+# ...\AJanedy_Comp490_002_Sprints\src\ai_resume_builder
 script_directory = os.path.dirname(os.path.abspath(__file__))
-file_directory = os.path.join(script_directory, "source_text_files")
-FILE_PATHS = {filename: os.path.join(file_directory, f"{filename}.txt") for filename in FILENAMES}
+# \AJanedy_Comp490_002_Sprints\src\ai_resume_builder\source_text_files
+txt_file_directory = os.path.join(script_directory, "source_text_files")
+# Set each filepath to the absoulte path
+files = {filename: os.path.join(txt_file_directory, filepath) for filename, filepath in files.items()}
 
+# ...\AJanedy_Comp490_002_Sprints\src\ai_resume_builder\resumes
 RESUME_DIRECTORY = os.path.join(script_directory, "resumes")
 
 
@@ -58,8 +61,8 @@ def get_api_key():
     :return:
     """
     api_key = os.environ.get("API_KEY")  # Get API key from environment variable
-    if not api_key:
-        api_key = read_file(FILE_PATHS["api_key"])
+    if not api_key:  # If API_KEY is not an environment variable
+        api_key = read_file(files["API_KEY"])
     return api_key
 
 
@@ -68,7 +71,7 @@ def get_next_resume_filename():
     A method for dynamically naming the new file that will contain the next AI generated
     resume response.  This method opens the directory of .txt files, creates a list of
     the counts (files are named incrementally, [ai_generated_resume_1,
-    ai_generated_resume_2, ...3, ...4], then determines what the next file should be
+    ai_generated_resume_2, ...3, ...4]), then determines what the next file should be
     called by finding the max value of the list.
     :return:
     """
@@ -88,7 +91,8 @@ def get_next_resume_filename():
         except ValueError:
             continue
 
-    # Finds the highest number used and increments, defaults to 0 if existing_numbers is empty
+    # Finds the highest number used and increments it;
+    # defaults to 0 if existing_numbers is empty
     next_number = max(existing_numbers, default=0) + 1
     return os.path.join(RESUME_DIRECTORY, f"ai_generated_resume_{next_number}.txt")
 
@@ -99,10 +103,14 @@ def generate_resume():
     """
 
     api_key = get_api_key()
-    job_description = read_file(FILE_PATHS["job_description"])
-    skills = read_file(FILE_PATHS["skills"])
-    prompt = read_file(FILE_PATHS["prompt"])
 
+    # These str variables hold parts of the prompt given to
+    # Google generative-ai
+    job_description = read_file(files["JOB_DESCRIPTION"])
+    skills = read_file(files["SKILLS"])
+    prompt = read_file(files["PROMPT"])
+
+    # Build the string that will hold the query
     query = (f"Job Description: {job_description}\n\n"
              f"Skills and Qualifications: {skills}\n\n"
              f"{prompt}")
@@ -113,10 +121,10 @@ def generate_resume():
     # *MTczODQyODc2OS4xLjEuMTczODQyOTAwNy42MC4wLjc3ODAwMjE5Mg..#python
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(query)
+    response = model.generate_content(query)  # Execute query, store response
 
-    resume_filename = get_next_resume_filename()
-    write_to_file(resume_filename, response.text)
+    new_resume_filename = get_next_resume_filename()  # Get next filename for new resume
+    write_to_file(new_resume_filename, response.text)  # Store response to new file
 
 
 if __name__ == "__main__":
