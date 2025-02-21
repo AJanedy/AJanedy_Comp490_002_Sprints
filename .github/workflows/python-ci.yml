@@ -59,7 +59,7 @@ jobs:                        # Creates a job
 
     - name: Run tests
       run: |          # Run pytest on the tests directory
-        export PYTHONPATH=$(pwd)/src  # Set PYTHONPATH explicitly for pytest
+        export PYTHONPATH=$(pwd)  # Set PYTHONPATH explicitly for pytest
         pytest tests/test_ai_resume_builder   # Run the tests specific to ai_resume_builder
         pytest tests/test_job_search_database  # Run the tests specific to job_search_database
       env:
