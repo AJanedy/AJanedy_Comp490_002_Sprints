@@ -26,14 +26,15 @@ jobs:                        # Creates a job
         python -m pip install --upgrade pip  
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Set PYTHONPATH                              # Allows Python to find src module
-      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
-                                                        # $GITHUB_ENV stores env variables
 
   run-module:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set PYTHONPATH                          # Allows Python to find src module
+      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
+                                                    # $GITHUB_ENV stores env variables
+
     - name: Run ai_resume_builder
       run: |
         python src/ai_resume_builder/resume_generator.py  # Run ai_resume_builder module
@@ -46,6 +47,10 @@ jobs:                        # Creates a job
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set PYTHONPATH                          # Allows Python to find src module
+      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
+                                                    # $GITHUB_ENV stores env variables
+
     - name: Run pylint on ai_resume_builder
       run: |
         echo "Current Directory: $(pwd)"
@@ -67,6 +72,10 @@ jobs:                        # Creates a job
     runs-on: ubuntu-latest
 
     steps:
+    - name: Set PYTHONPATH                          # Allows Python to find src module
+      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
+                                                    # $GITHUB_ENV stores env variables
+
     - name: Run tests
       run: |      
         echo "Current Directory: $(pwd)"
