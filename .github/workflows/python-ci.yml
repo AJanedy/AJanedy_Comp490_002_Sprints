@@ -12,7 +12,7 @@ jobs:                        # Creates a job
     env:
       API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable
 
-    steps:                        # Steps in the job
+    steps:
     - name: Checkout code
       uses: actions/checkout@v2   # use GitHub checkout action to clone the repository to the runner
 
@@ -43,19 +43,12 @@ jobs:                        # Creates a job
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pylint src/ai_resume_builder  # Run pylint on ai_resume_builder directory
-#      working-directory: src
-#      env:
-#        PYTHONPATH: $(pwd)/src  # Ensure pylint can find src/ai_resume_builder
-
 
     - name: Run pylint on job_search_database
       run: |
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pylint src/job_search_database  # Run pylint on job_search_database directory
-#      working-directory: ${{ github.workspace }}  # Root directory of repository
-#      env:
-#        PYTHONPATH: ${{ github.workspace }}  # Ensure pylint can find src/job_search_database
 
     - name: Run pylint on tests
       run: |
@@ -63,9 +56,9 @@ jobs:                        # Creates a job
         pylint tests  # Run pylint on tests directory
 
     - name: Run tests
-      run: |          # Run pytest on the tests directory
+      run: |      
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pytest tests/test_job_search_database  # Run the tests specific to job_search_database
       env:
-        API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable
+        API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable for tests
