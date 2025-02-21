@@ -36,7 +36,8 @@ def test_2_normalize_file():
     """
 
     source_file = Path(os.path.join(test_directory, "json_list_test_file.json"))
-    expected_new_file = Path(os.path.join(test_directory, Path("json_list_test_file_normalized.json")))
+    expected_new_file = Path(os.path.join
+                             (test_directory, Path("json_list_test_file_normalized.json")))
     expected_new_file_line_count = 10
 
     # Logic for suppressing the print statements of the method
