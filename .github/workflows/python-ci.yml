@@ -53,9 +53,9 @@ jobs:                        # Creates a job
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
         pylint src/job_search_database  # Run pylint on job_search_database directory
-      working-directory: ${{ github.workspace }}  # Root directory of repository
-      env:
-        PYTHONPATH: ${{ github.workspace }}  # Ensure pylint can find src/job_search_database
+#      working-directory: ${{ github.workspace }}  # Root directory of repository
+#      env:
+#        PYTHONPATH: ${{ github.workspace }}  # Ensure pylint can find src/job_search_database
 
     - name: Run pylint on tests
       run: |
