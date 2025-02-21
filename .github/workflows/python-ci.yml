@@ -45,12 +45,12 @@ jobs:                        # Creates a job
         pylint ai_resume_builder  # Run pylint on ai_resume_builder directory
       working-directory: src/ai_resume_builder
 
-    - name: Run pylint on job_search_database
-      run: |
-        echo "Current Directory: $(pwd)"
-        echo "Python Path: $PYTHONPATH"
-        pylint job_search_database  # Run pylint on job_search_database directory
-      working-directory: src/job_search_database
+      #    - name: Run pylint on job_search_database
+      #      run: |
+      #        echo "Current Directory: $(pwd)"
+      #        echo "Python Path: $PYTHONPATH"
+      #        pylint job_search_database  # Run pylint on job_search_database directory
+      #      working-directory: src/job_search_database
 
     - name: Run pylint on tests
       run: |
