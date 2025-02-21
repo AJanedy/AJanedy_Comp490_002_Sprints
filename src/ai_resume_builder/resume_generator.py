@@ -21,7 +21,8 @@ script_directory = os.path.dirname(os.path.abspath(__file__))
 # \AJanedy_Comp490_002_Sprints\src\ai_resume_builder\source_text_files
 txt_file_directory = os.path.join(script_directory, "source_text_files")
 # Set each filepath to the absoulte path
-files = {filename: os.path.join(txt_file_directory, filepath) for filename, filepath in files.items()}
+files = {filename: os.path.join(txt_file_directory, filepath)
+         for filename, filepath in files.items()}
 
 # ...\AJanedy_Comp490_002_Sprints\src\ai_resume_builder\resumes
 RESUME_DIRECTORY = os.path.join(script_directory, "resumes")
