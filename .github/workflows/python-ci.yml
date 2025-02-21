@@ -27,7 +27,7 @@ jobs:                        # Creates a job
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Set PYTHONPATH                              # Allows Python to find src module
-      run: echo "PYTHONPATH=$(pwd)/src" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
+      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
                                                         # $GITHUB_ENV stores env variables
 
     - name: Run ai_resume_builder
