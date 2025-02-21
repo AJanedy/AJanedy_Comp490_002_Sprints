@@ -54,8 +54,8 @@ jobs:                        # Creates a job
 
     - name: Run pylint on tests
       run: |
+        export PYTHONPATH=$(pwd)
         pylint tests  # Run pylint on tests directory
-      working-directory: src
 
     - name: Run tests
       run: |          # Run pytest on the tests directory
