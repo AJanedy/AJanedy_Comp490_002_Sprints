@@ -16,7 +16,7 @@ class JobListingPopUp(tk.Toplevel):
         self.create_label(job_info)
         frame = self.create_frame()
         self.text_widget = tk.Text(frame, wrap=tk.WORD, width=70, height=20)
-        self.create_text_widget(frame, job_info)
+        self.create_text_widget(job_info)
         self.create_close_button()
 
     def create_text_widget(self, job_info):

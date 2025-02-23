@@ -15,9 +15,6 @@ ROOT_DATABASE_PATH = os.path.join(ROOT_DIRECTORY, DATA_BASE_PATH)
 
 
 if __name__ == "__main__":
-    """
-    This is a docstring
-    """
 
     database_connection = create_database_connection(ROOT_DATABASE_PATH)
     job_listings = get_job_titles_from_database(database_connection)

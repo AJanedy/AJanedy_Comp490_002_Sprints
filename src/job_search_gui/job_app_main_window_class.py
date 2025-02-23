@@ -47,7 +47,7 @@ class AppMainWindow(tk.Tk):
             self.listbox.insert(tk.END, formatted_string)
         self.listbox.pack(fill=tk.BOTH, expand=True, padx=10, pady=(5, 0))
 
-    def on_job_selected(self):
+    def on_job_selected(self, _):
         """
         This is a docstring
         :return:
@@ -60,10 +60,9 @@ class AppMainWindow(tk.Tk):
             # Open a pop-up window for the selected job
             JobListingPopUp(self, job_info)
 
-    def on_tab_pressed(self, event):
+    def on_tab_pressed(self):
         """
         This is a docstring
-        :param event:
         :return:
         """
         # Move the focus to the next item in the Listbox when Tab is pressed
@@ -72,7 +71,6 @@ class AppMainWindow(tk.Tk):
             # If nothing is selected, select the first item
             self.listbox.activate(0)
             self.listbox.select_set(0)
-            return 0
         else:
             # Move selection to the next item and wrap around at the end
             next_index = (current_selection[0] + 1) % len(self.job_listings)
