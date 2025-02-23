@@ -9,9 +9,8 @@ source file is read and normalized, then written to the new, normalized
 file location.
 """
 import os
-import json
 from pathlib import Path
-from typing import TextIO
+from src.job_search_database.data_normalization import process_json_array, process_json_object
 
 
 def normalize_file(file: str, is_test: bool):
@@ -105,90 +104,4 @@ def build_path_object(source_file: Path):
     return normalized_file
 
 
-def process_json_array(source_file: Path, line: str, output_file: TextIO):
-    """
-    A method for extracting individual json objects from a line (string) containing a
-    list of json objects.
 
-    process_json_array() leverages the json.loads() method to create a list of json
-    objects from a single line (a string obtained from a source json file), the method
-    then iterates through this list, passing each json object into the
-    normalize_json_object() method where keys are normalized between sources where
-    applicable.  json.dumps() then formats the json object into a string to be written
-    to the new, normalized file
-
-    :param source_file: A Path object that represents a source json file
-    :param line: A string containing the contents of one line from the source json file.
-    :param output_file: A TextIO wrapper representing the output file for the
-        normalized json data
-    :return:
-    """
-    try:
-        json_objects = json.loads(line)  # Parse the JSON array from the line into a list.
-
-        for json_object in json_objects:
-            json_object = normalize_json_object(json_object)
-            # Write each JSON object to the new file, one per line
-            output_file.write(json.dumps(json_object) + "\n")
-
-    except json.JSONDecodeError as e:
-        print(f"Error parsing line in {source_file}: {e}")
-
-
-def process_json_object(source_file: Path, line: str, output_file: TextIO):
-    """
-    A method for extracting individual json objects from a line (string) that
-    represents a single json object
-
-    process_json_array() leverages the json.loads() method to create a json objects
-    from a single line (a string obtained from a source json file), the method
-    then passes this object into the normalize_json_object() method where keys are
-    normalized between sources where applicable.  json.dumps() then formats the json
-    object into a string to be written to the new, normalized file.
-
-    :param source_file: A Path object that represents a source json file
-    :param line: A string containing the contents of one line from the source json file.
-    :param output_file: A TextIO wrapper representing the output file for the
-        normalized json data
-    :return:
-    """
-    try:
-        json_objects = json.loads(line)
-        json_object = normalize_json_object(json_objects)
-        output_file.write(json.dumps(json_object) + "\n")
-
-    except json.JSONDecodeError as e:
-        print(f"Error parsing line in {source_file}: {e}")
-
-
-def normalize_json_object(json_obj: dict):
-    """
-    A method for normalizing json objects with similar attributes
-    of different names for future database manipulation
-
-    :param json_obj: Dictionary/json object
-    :return json_obj: Dictionary/json object
-    """
-    if "salaryRange" in json_obj:
-        json_obj["compensation"] = json_obj.pop("salaryRange")
-    if "jobProviders" in json_obj:
-        json_obj["job_providers"] = json_obj.pop("jobProviders")
-    if "employmentType" in json_obj:
-        json_obj["employment_type"] = json_obj.pop("employmentType")
-    if "datePosted" in json_obj:
-        json_obj["date_posted"] = json_obj.pop("datePosted")
-    if "interval" not in json_obj:
-        json_obj["interval"] = "yearly"
-    if "min_amount" in json_obj:
-        json_obj["compensation"] = f"{json_obj['min_amount']} - {json_obj['max_amount']}"
-        del json_obj["min_amount"]
-        del json_obj["max_amount"]
-    if "company_addresses" in json_obj:
-        json_obj["location"] = json_obj.pop("company_addresses")
-    if "job_type" in json_obj:
-        json_obj["employment_type"] = json_obj.pop("job_type")
-    if "image" in json_obj:
-        json_obj["company_logo"] = json_obj.pop("image")
-    if "job_url" not in json_obj:
-        json_obj["job_url"] = ""
-    return json_obj

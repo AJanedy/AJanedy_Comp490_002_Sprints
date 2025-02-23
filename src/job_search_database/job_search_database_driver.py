@@ -36,23 +36,42 @@ from each json file.  This process begins with the populate_database()
 method found in database_management.py.
 """
 import os
+import sys
+
 from src.job_search_database.database_management import create_database, populate_database
 from src.job_search_database.file_management import normalize_file
 from src.job_search_database.key_comparison import compare_keys
 
+SCRIPT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIRECTORY = os.path.abspath(os.path.join(SCRIPT_DIRECTORY, "../../"))
+
+DATABASE_PATH = "job_listings.db"
+ROOT_DATABASE_PATH = os.path.join(ROOT_DIRECTORY, DATABASE_PATH)
+MODULE_DATABASE_PATH = os.path.join(SCRIPT_DIRECTORY, DATABASE_PATH)
 
 FILENAMES = [
     "rapid_jobs2",
     "rapid_results"
 ]
 
-SCRIPT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 FILE_DIRECTORY = os.path.join(SCRIPT_DIRECTORY, "json_files")
 FILE_PATHS = {filename: os.path.join(FILE_DIRECTORY, f"{filename}.json") for filename in FILENAMES}
 
+
 normalized_files = []
 
-DATABASE_PATH = "job_listings.db"
+
+def create_symlink_database_in_root():
+
+    if os.path.exists(ROOT_DATABASE_PATH):
+        os.remove(ROOT_DATABASE_PATH)
+
+    # Windows needs admin or Developer Mode for symlinks
+    if sys.platform.startswith("win"):
+        os.symlink(MODULE_DATABASE_PATH, ROOT_DATABASE_PATH)
+
+    else:
+        os.symlink(MODULE_DATABASE_PATH, ROOT_DATABASE_PATH)  # Works on Linux/macOS
 
 
 def launch_job_database():
@@ -67,9 +86,11 @@ def launch_job_database():
     # Can be used for further comparison and normalization of data
     compare_keys(normalized_files)
 
-    create_database(DATABASE_PATH)
-    populate_database(DATABASE_PATH, normalized_files)
+    create_database(MODULE_DATABASE_PATH)
+    populate_database(MODULE_DATABASE_PATH, normalized_files)
 
 
 if __name__ == "__main__":
     launch_job_database()
+    create_symlink_database_in_root()
+

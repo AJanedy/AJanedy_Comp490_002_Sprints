@@ -1,0 +1,53 @@
+import sqlite3
+from sqlite3 import Connection
+
+
+def create_database_connection(database_path: str):
+    """
+    Connect to database
+    :param database_path:
+    :return:
+    """
+    connection = sqlite3.connect(database_path)
+    return connection
+
+
+def get_job_titles_from_database(database_connection: Connection):
+    """
+    Get job_titles and their ids to display to the main window
+    :param database_connection:
+    :return:
+    """
+    cursor = database_connection.cursor()
+    cursor.execute("""
+        SELECT id, 
+               title, 
+               company, 
+               location, 
+               date_posted, 
+               description, 
+               employment_type, 
+               interval, 
+               compensation, 
+               job_url 
+        FROM job_listings
+        """
+                   )
+    job_listings = {}
+
+    rows = cursor.fetchall()
+
+    for row in rows:
+        job_listings[row[0]] = {
+            "job_title": row[1],
+            "company": row[2],
+            "location": row[3],
+            "date_posted": row[4],
+            "description": row[5],
+            "employment_type": row[6],
+            "interval": row[7],
+            "compensation": row[8],
+            "job_url": row[9]
+        }
+
+    return job_listings

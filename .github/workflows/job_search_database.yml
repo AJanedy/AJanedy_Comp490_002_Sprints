@@ -64,7 +64,6 @@ jobs:
       run: |
         export PYTHONPATH=$(pwd)
         pylint tests/test_job_search_database  # Run pylint on tests directory
-      continue-on-error: true
 
   run-tests:
     runs-on: ubuntu-latest
