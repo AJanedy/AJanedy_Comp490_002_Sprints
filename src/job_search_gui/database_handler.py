@@ -1,3 +1,6 @@
+"""
+This is a docstring
+"""
 import sqlite3
 from sqlite3 import Connection
 

@@ -67,7 +67,7 @@ jobs:
 
       - name: Set PYTHONPATH                          # Allows Python to find src module
         run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
-        # $GITHUB_ENV stores env variables
+                                                      # $GITHUB_ENV stores env variables
 
       - name: Run pylint on job_search_gui
         run: |
@@ -94,7 +94,7 @@ jobs:
 
       - name: Set PYTHONPATH                          # Allows Python to find src module
         run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
-        # $GITHUB_ENV stores env variables
+                                                      # $GITHUB_ENV stores env variables
       - name: Run tests
         run: |
           echo "Current Directory: $(pwd)"

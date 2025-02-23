@@ -1,8 +1,14 @@
+"""
+This is a docstring
+"""
 import tkinter as tk
-from src.job_search_gui.JobListingPopUp import JobListingPopUp
+from src.job_search_gui.job_listing_pop_up_class import JobListingPopUp
 
 
 class AppMainWindow(tk.Tk):
+    """
+    This is a docstring
+    """
     def __init__(self, database_connection, job_listings):
         super().__init__()
         self.sort_by_location_button = None
@@ -17,12 +23,20 @@ class AppMainWindow(tk.Tk):
         self.event_handler()
 
     def event_handler(self):
+        """
+        This is a docstring
+        :return:
+        """
         # Bind event for when an item is selected
         self.listbox.bind("<<ListboxSelect>>", self.on_job_selected)
         self.listbox.bind("<Return>", self.on_job_selected)
         self.listbox.bind("<Tab>", self.on_tab_pressed)
 
     def populate_listbox_with_jobs(self):
+        """
+        This is a docstring
+        :return:
+        """
         self.listbox.delete(0, tk.END)
         for job_id, job_info in self.job_listings.items():
             job_title = job_info['job_title']
@@ -34,6 +48,11 @@ class AppMainWindow(tk.Tk):
         self.listbox.pack(fill=tk.BOTH, expand=True, padx=10, pady=(5, 0))
 
     def on_job_selected(self, event):
+        """
+        This is a docstring
+        :param event:
+        :return:
+        """
         # Get the selected job from the Listbox
         selected_index = self.listbox.curselection()
         if selected_index:
@@ -43,6 +62,11 @@ class AppMainWindow(tk.Tk):
             JobListingPopUp(self, job_info)
 
     def on_tab_pressed(self, event):
+        """
+        This is a docstring
+        :param event:
+        :return:
+        """
         # Move the focus to the next item in the Listbox when Tab is pressed
         current_selection = self.listbox.curselection()
         if not current_selection:
@@ -58,6 +82,10 @@ class AppMainWindow(tk.Tk):
             return 0  # Prevent the default Tab behavior (to focus on other widgets)
 
     def create_sort_buttons(self):
+        """
+        This is a docstring
+        :return:
+        """
         # Create a frame for sorting buttons and align them side by side.
         button_frame = tk.Frame(self)
         button_frame.pack(side=tk.LEFT, fill=tk.X, pady=5)
