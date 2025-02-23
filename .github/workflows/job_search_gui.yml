@@ -32,10 +32,12 @@ jobs:
         run: sudo apt-get install -y xvfb
 
         # Launch a virtual X server, which allows Tkinter to function
-      - name: Run Tkinter script with xvfb
+      - name: Run job_search_gui script with xvfb
         run: |
           python src/job_search_database/job_search_database_driver.py  # Run to get database for gui
           xvfb-run --auto-servernum python src/job_search_gui/job_search_gui_driver.py
+          sleep 10  # Allow the program to run for 10 seconds
+          pkill -f job_search_gui_driver.py  
 
   run_pylint:
     runs-on: ubuntu-latest
