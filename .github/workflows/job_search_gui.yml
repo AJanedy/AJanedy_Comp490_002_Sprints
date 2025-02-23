@@ -26,9 +26,9 @@ jobs:
       - name: Set PYTHONPATH                          # Allows Python to find src module
         run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
         # $GITHUB_ENV stores env variables
-      - name: Run ai_resume_builder
+      - name: Run job_search_gui
         run: |
-          python src/job_search_database/job_search_database_driver  # Run to get database for gui
+          python src/job_search_database/job_search_database_driver.py  # Run to get database for gui
           python src/job_search_gui/job_search_gui_driver.py  # Run ai_resume_builder module
 
   run_pylint:
