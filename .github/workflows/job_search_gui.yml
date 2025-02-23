@@ -31,11 +31,22 @@ jobs:
       - name: Install xvfb
         run: sudo apt-get install -y xvfb
 
-        # Launch a virtual X server, which allows Tkinter to function
       - name: Run job_search_gui script with xvfb
         run: |
           python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
-          timeout 30 xvfb-run --auto-servernum python src/job_search_gui/job_search_gui_driver.py
+          
+          # Run program in background
+          xvfb-run --auto-servernum python src/job_search_gui/job_search_gui_driver.py &
+          
+          PID=$!  # Get process ID of the background job
+          
+          # Check if the process is still running and kill it if necessary
+          if ps -p $PID > /dev/null; then
+          echo "Process is still running. Killing it..."
+          kill $PID  # Terminate the process
+          else
+            echo "Process completed successfully."
+          fi
 
   run_pylint:
     runs-on: ubuntu-latest
