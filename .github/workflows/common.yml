@@ -1,4 +1,4 @@
-name: Comp490_002_Sprints Workflow
+name: Comp490_002_Sprints Common Workflow
 
 on:           # Run workflow
   push:       # with every push
@@ -8,9 +8,6 @@ on:           # Run workflow
 jobs:                        # Creates a job
   build:                     # named "build"
     runs-on: ubuntu-latest   # that runs on the latest version of Ubuntu
-
-    env:
-      API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable
 
     steps:
     - name: Checkout code
@@ -58,9 +55,6 @@ jobs:                        # Creates a job
   run_job_search_database:
     runs-on: ubuntu-latest
 
-    env:
-      API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2   # use GitHub checkout action to clone the repository to the runner
@@ -83,33 +77,6 @@ jobs:                        # Creates a job
         python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
 
   run_job_search_gui:
-    runs-on: ubuntu-latest
-
-    env:
-      API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2   # use GitHub checkout action to clone the repository to the runner
-
-    - name: Set up Python
-      uses: actions/setup-python@v2  # Installs Python on the runner
-      with:
-        python-version: '3.9'
-
-    - name: Install dependencies
-      run: |                                  # Upgrades pip and installs dependencies
-        python -m pip install --upgrade pip  
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-    - name: Set PYTHONPATH                          # Allows Python to find src module
-      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
-                                                    # $GITHUB_ENV stores env variables
-    - name: Run job_search_gui
-      run: |
-        python src/job_search_gui/job_search_gui_driver.py  # Run job_search_database module
-
-  run-gui:
     runs-on: ubuntu-latest
 
     steps:
