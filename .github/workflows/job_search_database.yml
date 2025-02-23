@@ -30,8 +30,7 @@ jobs:
       run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
                                                     # $GITHUB_ENV stores env variables
     - name: Run job_search_database
-      run: |
-        python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
+      run: python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
 
   run_pylint:
     runs-on: ubuntu-latest

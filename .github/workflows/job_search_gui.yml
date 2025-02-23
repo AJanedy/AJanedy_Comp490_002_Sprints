@@ -29,6 +29,9 @@ jobs:
       - name: Set PYTHONPATH                          # Allows Python to find src module
         run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
                                                       # $GITHUB_ENV stores env variables
+      - name: Run job_search_database
+        run: python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
+
 
   build-and-run-gui:
     runs-on: ubuntu-latest
