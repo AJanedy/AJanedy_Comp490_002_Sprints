@@ -19,10 +19,9 @@ class JobListingPopUp(tk.Toplevel):
         self.create_text_widget(frame, job_info)
         self.create_close_button()
 
-    def create_text_widget(self, frame, job_info):
+    def create_text_widget(self, job_info):
         """
         This is a docstring
-        :param frame:
         :param job_info:
         :return:
         """

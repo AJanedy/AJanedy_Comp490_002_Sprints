@@ -38,7 +38,7 @@ class AppMainWindow(tk.Tk):
         :return:
         """
         self.listbox.delete(0, tk.END)
-        for job_id, job_info in self.job_listings.items():
+        for _, job_info in self.job_listings.items():
             job_title = job_info['job_title']
             location = job_info['location']
 
@@ -47,10 +47,9 @@ class AppMainWindow(tk.Tk):
             self.listbox.insert(tk.END, formatted_string)
         self.listbox.pack(fill=tk.BOTH, expand=True, padx=10, pady=(5, 0))
 
-    def on_job_selected(self, event):
+    def on_job_selected(self):
         """
         This is a docstring
-        :param event:
         :return:
         """
         # Get the selected job from the Listbox
@@ -73,9 +72,10 @@ class AppMainWindow(tk.Tk):
             # If nothing is selected, select the first item
             self.listbox.activate(0)
             self.listbox.select_set(0)
+            return 0
         else:
-            # Move selection to the next item
-            next_index = (current_selection[0] + 1) % len(self.job_listings)  # Wrap around at the end
+            # Move selection to the next item and wrap around at the end
+            next_index = (current_selection[0] + 1) % len(self.job_listings)
             self.listbox.select_clear(0, tk.END)  # Clear all selections
             self.listbox.select_set(next_index)  # Set the next item as selected
             self.listbox.activate(next_index)
@@ -91,19 +91,21 @@ class AppMainWindow(tk.Tk):
         button_frame.pack(side=tk.LEFT, fill=tk.X, pady=5)
 
         # Button to close the pop-up window
-        self.sort_by_name_button = tk.Button(button_frame, text="Sort by Name", command=self.sort_by_name)
+        self.sort_by_name_button = tk.Button(
+            button_frame, text="Sort by Name", command=self.sort_by_name)
         self.sort_by_name_button.pack(side=tk.RIGHT, expand=True, padx=10, pady=5)
-        self.sort_by_location_button = tk.Button(button_frame, text="Sort by Location", command=self.sort_by_location)
+        self.sort_by_location_button = tk.Button(
+            button_frame, text="Sort by Location", command=self.sort_by_location)
         self.sort_by_location_button.pack(side=tk.LEFT, expand=True, padx=(10, 5), pady=5)
 
     def sort_by_name(self):
         """Sort job listings by job title and update the listbox."""
-        self.job_listings = dict(sorted(self.job_listings.items(), key=lambda item: item[1]['job_title']))
+        self.job_listings = dict(sorted(self.job_listings.items(),
+                                        key=lambda item: item[1]['job_title']))
         self.populate_listbox_with_jobs()
 
     def sort_by_location(self):
         """Sort job listings by location and update the listbox."""
-        self.job_listings = dict(reversed(sorted(self.job_listings.items(), key=lambda item: item[1]['location'])))
+        self.job_listings = dict(reversed(sorted(self.job_listings.items(),
+                                                 key=lambda item: item[1]['location'])))
         self.populate_listbox_with_jobs()
-
-

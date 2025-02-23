@@ -5,7 +5,8 @@ This is a docstring
 import os
 
 from src.job_search_gui.job_app_main_window_class import AppMainWindow
-from src.job_search_gui.database_handler import create_database_connection, get_job_titles_from_database
+from src.job_search_gui.database_handler import (
+    create_database_connection, get_job_titles_from_database)
 
 DATA_BASE_PATH = "job_listings.db"
 SCRIPT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
@@ -23,6 +24,3 @@ if __name__ == "__main__":
 
     app = AppMainWindow(database_connection, job_listings)
     app.mainloop()
-
-
-
