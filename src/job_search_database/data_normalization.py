@@ -134,13 +134,6 @@ def normalize_location_data(json_obj: dict):
     json_obj["location"] = extract_city_state_country(json_obj["location"])
     normalize_city_state_country(json_obj)
 
-    location = json_obj["location"]
-
-    if not location.endswith("United States"):
-        if location != "":
-            if not bool(re.fullmatch(r'\s*\w+(?:\s\w+)*,\s*\w+(?:\s\w+)*\s*', location)):
-                print(json_obj["location"])
-
     return json_obj
 
 

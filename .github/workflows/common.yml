@@ -82,6 +82,33 @@ jobs:                        # Creates a job
       run: |
         python src/job_search_database/job_search_database_driver.py  # Run job_search_database module
 
+  run_job_search_gui:
+    runs-on: ubuntu-latest
+
+    env:
+      API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2   # use GitHub checkout action to clone the repository to the runner
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # Installs Python on the runner
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |                                  # Upgrades pip and installs dependencies
+        python -m pip install --upgrade pip  
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Set PYTHONPATH                          # Allows Python to find src module
+      run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
+                                                    # $GITHUB_ENV stores env variables
+    - name: Run job_search_gui
+      run: |
+        python src/job_search_gui/job_search_gui_driver.py  # Run job_search_database module
+
   run_pylint:
     runs-on: ubuntu-latest
 
@@ -116,6 +143,10 @@ jobs:                        # Creates a job
         echo "PYTHONPATH: $PYTHONPATH"
         pylint src/job_search_database  # Run pylint on job_search_database directory
       continue-on-error: true
+
+    - name: Run pylint on job_search_gui
+      run: |
+        pylint src/job_search_gui  # Run pylint on job_search_gui
 
     - name: Run pylint on tests
       run: |

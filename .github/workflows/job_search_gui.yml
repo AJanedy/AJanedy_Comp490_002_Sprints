@@ -28,6 +28,7 @@ jobs:
         # $GITHUB_ENV stores env variables
       - name: Run ai_resume_builder
         run: |
+          python src/job_search_database/job_search_database_driver  # Run to get database for gui
           python src/job_search_gui/job_search_gui_driver.py  # Run ai_resume_builder module
 
   run_pylint:

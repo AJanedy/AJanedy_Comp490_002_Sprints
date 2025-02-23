@@ -63,15 +63,10 @@ normalized_files = []
 
 def create_symlink_database_in_root():
 
-    if os.path.exists(ROOT_DATABASE_PATH):
+    if os.path.exists(ROOT_DATABASE_PATH) or os.path.islink(ROOT_DATABASE_PATH):
         os.remove(ROOT_DATABASE_PATH)
 
-    # Windows needs admin or Developer Mode for symlinks
-    if sys.platform.startswith("win"):
-        os.symlink(MODULE_DATABASE_PATH, ROOT_DATABASE_PATH)
-
-    else:
-        os.symlink(MODULE_DATABASE_PATH, ROOT_DATABASE_PATH)  # Works on Linux/macOS
+    os.symlink(MODULE_DATABASE_PATH, ROOT_DATABASE_PATH)  # Works on Linux/macOS
 
 
 def launch_job_database():
@@ -92,5 +87,5 @@ def launch_job_database():
 
 if __name__ == "__main__":
     launch_job_database()
-    # create_symlink_database_in_root()
+    create_symlink_database_in_root()
 
