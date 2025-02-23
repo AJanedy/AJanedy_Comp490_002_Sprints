@@ -78,6 +78,7 @@ class AppMainWindow(tk.Tk):
             self.listbox.select_set(next_index)  # Set the next item as selected
             self.listbox.activate(next_index)
             return 0  # Prevent the default Tab behavior (to focus on other widgets)
+        return 0
 
     def create_sort_buttons(self):
         """
