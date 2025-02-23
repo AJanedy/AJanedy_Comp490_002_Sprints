@@ -33,12 +33,9 @@ jobs:
 
         # Launch a virtual X server, which allows Tkinter to function
       - name: Run Tkinter script with xvfb
-        run: xvfb-run --auto-servernum python src/job_search_gui/job_search_gui_driver.py
-
-      - name: Run job_search_gui
         run: |
           python src/job_search_database/job_search_database_driver.py  # Run to get database for gui
-          python src/job_search_gui/job_search_gui_driver.py  # Run ai_resume_builder module
+          xvfb-run --auto-servernum python src/job_search_gui/job_search_gui_driver.py
 
   run_pylint:
     runs-on: ubuntu-latest
