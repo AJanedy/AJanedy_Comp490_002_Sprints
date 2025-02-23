@@ -23,9 +23,17 @@ jobs:
           python -m pip install --upgrade pip  
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+        # Provides a virtual display to fun GUI apps in headless env
+      - name: Install xvfb
+        run: sudo apt-get install -y xvfb
+
+        # Launch a virtual X server, which allows Tkinter to function
+      - name: Run Tkinter script with xvfb
+        run: xvfb-run --auto-servernum python src/job_search_gui/job_search_gui_driver.py
+
       - name: Set PYTHONPATH                          # Allows Python to find src module
         run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV  # Set the PYTHONPATH to src folder
-        # $GITHUB_ENV stores env variables
+                                                      # $GITHUB_ENV stores env variables
       - name: Run job_search_gui
         run: |
           python src/job_search_database/job_search_database_driver.py  # Run to get database for gui
