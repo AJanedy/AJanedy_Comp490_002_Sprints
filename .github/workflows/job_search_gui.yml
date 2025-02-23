@@ -64,9 +64,9 @@ jobs:
           sleep 10  
           xvfb-run --auto-servernum python src/job_search_gui/job_search_gui_driver.py
           sleep 10  # Allow the program to run for 10 seconds
-
-      - name: Kill GUI process
-        run: pkill -f job_search_gui_driver.py
+          pkill -f job_search_gui_driver.py
+#      - name: Kill GUI process
+#        run: pkill -f job_search_gui_driver.py
 
   run_pylint:
     runs-on: ubuntu-latest
