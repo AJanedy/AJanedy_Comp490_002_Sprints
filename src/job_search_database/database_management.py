@@ -37,6 +37,7 @@ def create_database(database_path: str):
 
         create_shared_table(cursor)
         create_rapid_results_unique_table(cursor)
+        create_user_profile_table(cursor)
 
         connection.commit()
         connection.close()
@@ -100,6 +101,22 @@ def create_rapid_results_unique_table(cursor: Cursor):
             company_url TEXT
         )
     """)
+
+
+def create_user_profile_table(cursor: Cursor):
+    cursor.execute("""
+            CREATE TABLE IF NOT EXISTS user_profiles (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                email TEXT,
+                phone_number TEXT,
+                linkedin_url TEXT,
+                github_url TEXT,
+                classes_taken TEXT,
+                projects_worked_on TEXT,
+                additional_info TEXT
+            )
+        """)
 
 
 def populate_database(database_path: str, source_files: list):

@@ -4,7 +4,7 @@ A class to represent a popup window that will display all job listing details.
 import tkinter as tk
 
 
-class JobListingPopUp(tk.Toplevel):
+class JobListingPopup(tk.Toplevel):
     """
     Instantiating this class creates a Toplevel window used to display
     the job details about a specific job listing.
