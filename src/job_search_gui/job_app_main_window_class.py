@@ -116,7 +116,7 @@ class AppMainWindow(tk.Tk):
             # Open a pop-up window for the selected job
             JobListingPopUp(self, job_info)
 
-    def on_tab_pressed(self, event):
+    def on_tab_pressed(self, _):
         """
         A method to navigate through actionable parts of the main window. Tab
         will cycle through the listbox as well as each button in the button
