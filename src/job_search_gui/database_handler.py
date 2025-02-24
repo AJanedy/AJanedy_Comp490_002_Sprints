@@ -1,5 +1,5 @@
 """
-This is a docstring
+A module for connecting to an SQL database and making basic queries
 """
 import sqlite3
 from sqlite3 import Connection
@@ -15,7 +15,7 @@ def create_database_connection(database_path: str):
     return connection
 
 
-def get_job_titles_from_database(database_connection: Connection):
+def get_jobs_from_database(database_connection: Connection):
     """
     Get job_titles and their ids to display to the main window
     :param database_connection:
@@ -36,7 +36,7 @@ def get_job_titles_from_database(database_connection: Connection):
         FROM job_listings
         """
                    )
-    job_listings = {}
+    job_listings = {}  # Create a dictionary to hold job data
 
     rows = cursor.fetchall()
 

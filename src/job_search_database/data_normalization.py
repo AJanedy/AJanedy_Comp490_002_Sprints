@@ -1,3 +1,17 @@
+"""
+A method for normalizing data in json files presented in different formats.
+
+process_json_object() will extract the dictionary from the object and pass it
+to the normalization process.  process_json_array will extract multiple json
+objects and pass them to the normalization process one by one.
+
+normalize_json_object will then send each object to different functions to
+normalize various aspects of the data.  At this time only the attribute
+names are being normalized to create a cohesive, singular table for job
+listings given to us in different formats with different names for the same
+type of data, as well as the best effort normalization of location data.
+"""
+
 from pathlib import Path
 from typing import TextIO
 import json
@@ -75,6 +89,12 @@ def normalize_json_object(json_obj: dict):
 
 
 def normalize_attributes(json_obj):
+    """
+    Creates a standard set of attribute names among multiple sets of
+    data containing job posting information
+
+    :param json_obj:
+    """
     if "salaryRange" in json_obj:
         json_obj["compensation"] = json_obj.pop("salaryRange")
     if "jobProviders" in json_obj:
@@ -138,6 +158,19 @@ def normalize_location_data(json_obj: dict):
 
 
 def normalize_city_state_country(json_obj):
+    """
+    A method to clean remaining location attributes that contained only
+    a city name and a few other outliers.
+
+    This methodology does not guarantee accurate locations.  Full location
+    information is given on "best guess" assumptions, meaning that a job
+    posted in "Boston" is assumed to be located in "Boston, MA, United
+    States", or that a job posted in WA DC is assumed to be located in
+    "Washington, DC, United States".
+
+    :param json_obj:
+    :return:
+    """
     location = json_obj["location"]
     if location.strip() in ["Boston", "Cambridge", "Somerville"]:
         json_obj["location"] = f"{json_obj['location']}, MA, United States"
@@ -172,11 +205,23 @@ def normalize_city_state_country(json_obj):
 
 
 def remove_usa(json_obj):
+    """
+    Removes "USA" from the location string
+
+    :param json_obj:
+    """
     if json_obj["location"].endswith(" USA"):
         json_obj["location"] = json_obj["location"].strip(" USA")
 
 
 def change_language_and_formatting_usa(json_obj, location):
+    """
+    Translates non-English "United States" to English
+
+    :param json_obj:
+    :param location:
+    :return:
+    """
     if "États-Unis" in location:
         json_obj["location"] = json_obj["location"].replace("États-Unis", "United States")
     if "Stati Uniti" in location:
@@ -188,16 +233,36 @@ def change_language_and_formatting_usa(json_obj, location):
 
 
 def append_united_states(json_obj, state_abbreviations):
+    """
+    A method to add ", United States" to the end of a location that ends with a state
+    abbreviation, i.e. "Somerville, MA" will become "Somerville, MA, United States"
+
+    :param json_obj:
+    :param state_abbreviations:
+    """
     location = json_obj["location"]
+
+    # Add ", United States" to a location where city and state are known
     if any(location.strip().endswith(abbrev) for abbrev in state_abbreviations.values()):
         json_obj["location"] = f"{json_obj['location']}, United States"
+
     location = json_obj["location"]
+
+    # Add ", United States" to a location where only the state is known
     if any((location.strip() == abbrev) for abbrev in state_abbreviations.values()):
         json_obj["location"] = f"{json_obj['location']}, United States"
     return location
 
 
 def normalize_state_abbreviations(json_obj, state_abbreviations):
+    """
+    A method to replace all states with their two letter abbreviations.
+    Conditionals are included to prevent New York city and Washington, DC
+    from being converted.
+
+    :param json_obj:
+    :param state_abbreviations:
+    """
     location = json_obj["location"]
     if "New York, New York" in location or "New York, NY" in location:
         json_obj["location"] = "New York, NY, United States"
@@ -207,15 +272,16 @@ def normalize_state_abbreviations(json_obj, state_abbreviations):
         for state, abbreviation in state_abbreviations.items():
             if state in location:
                 json_obj["location"] = json_obj["location"].replace(state, abbreviation)
-                # if abbreviation in json_obj["location"] and f"{abbreviation}, " not in json_obj["location"]:
-                #     json_obj["location"] = json_obj["location"].replace(abbreviation, f"{abbreviation}, ")
 
 
 def extract_city_state_country(address):
     """
+    A method to extract city, state, and country from a full address.
+
+    Example: 123 Frost Ave, Winthrop, MA, United States, 02152, will
+    have "Winthrop, Ma, United States" extracted and returned
+
     Pattern and match logic derived from Google Gemini AI query
-    :param address:
-    :return:
     """
     # Regular expression pattern to match city, state abbreviation, and country
     pattern = r"(\w+(?:[\s\w]+)?),\s([A-Z]{2}),\s([\w\s]+)$"
