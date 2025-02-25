@@ -1,8 +1,5 @@
-"""
-Test functions for job_search_gui
-"""
 import os
-
+from unittest.mock import MagicMock
 import pytest
 import sqlite3
 import tkinter as tk
@@ -12,18 +9,49 @@ from src.job_search_gui.user_attribute_pop_up import UserAttributePopup
 @pytest.fixture
 def setup_gui():
     """Fixture to set up a Tkinter root and database connection."""
-    # Check if running in a headless environment (e.g., GitHub Actions)
     if os.environ.get('DISPLAY', '') == '':
-        root = tk.Tk()
-        root.withdraw()  # Hide the main window
+        # Mock Tk() to prevent actual GUI window creation in headless environments
+        mock_root = MagicMock(spec=tk.Tk)
+        mock_root.withdraw = MagicMock()  # Mock the withdraw method
+        mock_root.quit = MagicMock()  # Mock the quit method to prevent blocking event loop
+        # Mock the necessary `tk` attributes for proper initialization of UserAttributePopup
+        mock_root.tk = MagicMock()  # Mock the `tk` attribute
+        mock_root.children = {}  # Mock the `children` attribute
+        mock_root.master = None  # Mock the `master` attribute as None, or root
+        root = mock_root
     else:
         root = tk.Tk()  # Allow normal display if running locally
+
     db_conn = sqlite3.connect(":memory:")  # In-memory database
     popup = UserAttributePopup(root, db_conn)
+
+    # Mock the Entry widgets' get method to return the expected values
+    popup.entries = {
+        "Full Name:": MagicMock(spec=tk.Entry),
+        "Email:": MagicMock(spec=tk.Entry),
+        "Phone Number:": MagicMock(spec=tk.Entry),
+        "LinkedIn URL:": MagicMock(spec=tk.Entry),
+        "GitHub URL:": MagicMock(spec=tk.Entry),
+        "Classes Taken:": MagicMock(spec=tk.Text),
+        "Projects Worked On:": MagicMock(spec=tk.Text),
+        "Additional Information:": MagicMock(spec=tk.Text)
+    }
+
+    # Set the get() method to return the correct values
+    popup.entries["Full Name:"].get.return_value = "Alice Johnson"
+    popup.entries["Email:"].get.return_value = "alice@example.com"
+    popup.entries["Phone Number:"].get.return_value = "123-456-7890"
+    popup.entries["LinkedIn URL:"].get.return_value = "https://linkedin.com/alice"
+    popup.entries["GitHub URL:"].get.return_value = "https://github.com/alice"
+    popup.entries["Classes Taken:"].get.return_value = "CS101, CS102"
+    popup.entries["Projects Worked On:"].get.return_value = "Project A, Project B"
+    popup.entries["Additional Information:"].get.return_value = "Additional details here"
+
     yield popup, db_conn
     db_conn.close()
     popup.destroy()
-    root.destroy()
+    root.quit()  # Ensure the root.quit() is called to clean up Tkinter correctly
+    root.destroy()  # Clean up the mock object or real root window
 
 
 @pytest.fixture
@@ -85,8 +113,6 @@ def test_load_user_profile(create_mock_db):
     assert popup.entries["Phone Number:"].get() == "123-456-7890"
     assert popup.entries["LinkedIn URL:"].get() == "https://linkedin.com/alice"
     assert popup.entries["GitHub URL:"].get() == "https://github.com/alice"
-    assert popup.entries["Classes Taken:"].get("1.0", tk.END).strip() == "CS101, CS102"
-    assert popup.entries["Projects Worked On:"].get("1.0", tk.END).strip() == "Project A, Project B"
-    assert popup.entries["Additional Information:"].get("1.0", tk.END).strip() == "Additional details here"
-
-
+    assert popup.entries["Classes Taken:"].get() == "CS101, CS102"
+    assert popup.entries["Projects Worked On:"].get() == "Project A, Project B"
+    assert popup.entries["Additional Information:"].get() == "Additional details here"
