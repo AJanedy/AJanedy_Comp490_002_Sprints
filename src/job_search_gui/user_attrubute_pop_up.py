@@ -1,3 +1,5 @@
+
+
 import tkinter as tk
 
 
@@ -6,7 +8,7 @@ class UserAttributePopup(tk.Toplevel):
         super().__init__(parent)
         self.entries = None
         self.close_button = self.create_buttons()
-        self.title(f"Profile Creation")
+        self.title("Profile Creation")
         self.geometry("600x800")
         self.db_conn = database_connection
         self.create_input_fields()
@@ -104,4 +106,3 @@ class UserAttributePopup(tk.Toplevel):
         print(classes_taken)
         print(projects)
         print(additional_info)
-

@@ -184,4 +184,3 @@ class AppMainWindow(tk.Tk):
     def make_profile(self):
         """Create a popup window for the user to create a profile"""
         UserAttributePopup(self, self.db_conn)
-

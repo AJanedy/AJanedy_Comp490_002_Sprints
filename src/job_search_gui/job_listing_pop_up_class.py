@@ -1,5 +1,9 @@
 """
-A class to represent a popup window that will display all job listing details.
+This module defines a class to represent a popup window that will display all
+job listing details in a graphical user interface.
+
+JobListingPopUp is a Toplevel window that provides a detailed description of
+a selected job listing.
 """
 import tkinter as tk
 
