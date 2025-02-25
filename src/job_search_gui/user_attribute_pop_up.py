@@ -1,21 +1,45 @@
 """
-This is a docstring
-"""
+This module creates a graphical user interface popup used for
+collecting a user profile in relation to a job search.
 
+The GUI popup is a form for users to input personal details
+that would be relevant on a resume.  The data collected is
+stored to the same database used for organizing the job
+listings presented in the main window of this application.
+"""
 import tkinter as tk
 
 
 class UserAttributePopup(tk.Toplevel):
     """
-    This is a docstring
+    A popup GUI used to collect user attributes
+
+    This is a Toplevel window with labeled input fields used
+    to collect user details such as name, email, phone number,
+    LinkedIn and GitHub URLs, courses taken, applicable projects,
+    and other relevant information.
+
+    Attributes:
+        - db_conn: A database connection object
+        - entries: A dictionary mapping the GUI input labels to the
+            input given by the user.
+
+    Methods:
+        - __init__(parent, database_connection): Initializes the popup
+        - create_input_fields(): Creates the labeled entry fields for the
+            user to enter attributes.
+        - create_text_area(label_text): Used to create multiple, multi-line
+            input fields.
+        - create_buttons(): Used to create the close and submit buttons
+        - submit_info(): A method to submit user info to the database
     """
     def __init__(self, parent, database_connection):
         super().__init__(parent)
         self.entries = None
-        self.close_button = self.create_buttons()
         self.title("Profile Creation")
         self.geometry("600x800")
         self.db_conn = database_connection
+        self.create_buttons()
         self.create_input_fields()
 
     def create_input_fields(self):
@@ -73,13 +97,13 @@ class UserAttributePopup(tk.Toplevel):
         submit_button.pack(side=tk.LEFT, padx=10, pady=(0, 0))
 
         # Button to close the pop-up window
-        self.close_button = tk.Button(button_frame, text="Close", command=self.destroy)
-        self.close_button.pack(side=tk.LEFT, padx=10, pady=(0, 0))
-
-        return self.close_button
+        close_button = tk.Button(button_frame, text="Close", command=self.destroy)
+        close_button.pack(side=tk.LEFT, padx=10, pady=(0, 0))
 
     def submit_info(self):
-        """Placeholder function to handle form submission."""
+        """
+        A method to handle user profile submission to the database.
+        """
         cursor = self.db_conn.cursor()
 
         name = self.entries["Full Name:"].get()
