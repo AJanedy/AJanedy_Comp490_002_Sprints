@@ -115,7 +115,7 @@ def test_3_create_database():
     # Creates a set of the tables in the database
     tables = {row[0] for row in cursor.fetchall()}
 
-    expected_tables = {"job_listings", "rapid_results_unique_data"}
+    expected_tables = {"job_listings", "rapid_results_unique_data", "user_profiles"}
     assert tables == expected_tables
 
     connection.commit()

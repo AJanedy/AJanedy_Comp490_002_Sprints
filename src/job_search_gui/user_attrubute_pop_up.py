@@ -1,9 +1,14 @@
-
+"""
+This is a docstring
+"""
 
 import tkinter as tk
 
 
 class UserAttributePopup(tk.Toplevel):
+    """
+    This is a docstring
+    """
     def __init__(self, parent, database_connection):
         super().__init__(parent)
         self.entries = None
