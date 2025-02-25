@@ -1,6 +1,7 @@
 """
 Test functions for job_search_gui
 """
+import os
 
 import pytest
 import sqlite3
@@ -11,8 +12,12 @@ from src.job_search_gui.user_attribute_pop_up import UserAttributePopup
 @pytest.fixture
 def setup_gui():
     """Fixture to set up a Tkinter root and database connection."""
-    root = tk.Tk()
-    root.withdraw()  # Hide the main window
+    # Check if running in a headless environment (e.g., GitHub Actions)
+    if os.environ.get('DISPLAY', '') == '':
+        root = tk.Tk()
+        root.withdraw()  # Hide the main window
+    else:
+        root = tk.Tk()  # Allow normal display if running locally
     db_conn = sqlite3.connect(":memory:")  # In-memory database
     popup = UserAttributePopup(root, db_conn)
     yield popup, db_conn
