@@ -115,7 +115,11 @@ def test_3_create_database():
     # Creates a set of the tables in the database
     tables = {row[0] for row in cursor.fetchall()}
 
-    expected_tables = {"job_listings", "rapid_results_unique_data", "user_profiles"}
+    # A set to represent all tables in the database.  "sqlite_sequence"
+    # represents a table created automatically when AUTOINCREMENT is used
+    expected_tables = {"job_listings", "rapid_results_unique_data",
+                       "user_profiles", "sqlite_sequence"}
+
     assert tables == expected_tables
 
     connection.commit()
