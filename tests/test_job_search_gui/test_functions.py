@@ -3,11 +3,13 @@ from unittest.mock import MagicMock
 import pytest
 import sqlite3
 import tkinter as tk
+
+from src.job_search_gui.job_app_main_window_class import AppMainWindow
 from src.job_search_gui.user_attribute_pop_up import UserAttributePopup
 
 
 @pytest.fixture
-def setup_gui():
+def setup_user_attribute_popup():
     """Fixture to set up a Tkinter root and database connection."""
     if os.environ.get('DISPLAY', '') == '':
         # Mock Tk() to prevent actual GUI window creation in headless environments
@@ -38,14 +40,14 @@ def setup_gui():
     }
 
     # Set the get() method to return the correct values
-    popup.entries["Full Name:"].get.return_value = "Alice Johnson"
-    popup.entries["Email:"].get.return_value = "alice@example.com"
+    popup.entries["Full Name:"].get.return_value = "Lenny Pepperbottom"
+    popup.entries["Email:"].get.return_value = "Lenny_Pepperbottom@thatsprettyneat.com"
     popup.entries["Phone Number:"].get.return_value = "123-456-7890"
-    popup.entries["LinkedIn URL:"].get.return_value = "https://linkedin.com/alice"
-    popup.entries["GitHub URL:"].get.return_value = "https://github.com/alice"
-    popup.entries["Classes Taken:"].get.return_value = "CS101, CS102"
-    popup.entries["Projects Worked On:"].get.return_value = "Project A, Project B"
-    popup.entries["Additional Information:"].get.return_value = "Additional details here"
+    popup.entries["LinkedIn URL:"].get.return_value = "https://linkedin.com/lenny"
+    popup.entries["GitHub URL:"].get.return_value = "https://github.com/lenny"
+    popup.entries["Classes Taken:"].get.return_value = "Environmental Science 101, Foraging 302"
+    popup.entries["Projects Worked On:"].get.return_value = "Manhattan Project, Project How Neat is That"
+    popup.entries["Additional Information:"].get.return_value = "Host of 'Neature Walk'"
 
     yield popup, db_conn
     db_conn.close()
@@ -55,9 +57,9 @@ def setup_gui():
 
 
 @pytest.fixture
-def create_mock_db(setup_gui):
+def create_mock_db(setup_user_attribute_popup):
     """Fixture to create a mock user_profiles table and insert sample data."""
-    popup, db_conn = setup_gui
+    popup, db_conn = setup_user_attribute_popup
     cursor = db_conn.cursor()
     cursor.execute("""
     CREATE TABLE user_profiles (
@@ -75,11 +77,18 @@ def create_mock_db(setup_gui):
     db_conn.commit()
 
     cursor.execute("""
-    INSERT INTO user_profiles (name, email, phone_number, linkedin_url, github_url, classes_taken, projects_worked_on, additional_info)
-    VALUES ('Alice Johnson', 'alice@example.com', '123-456-7890', 
-            'https://linkedin.com/alice', 'https://github.com/alice',
-            'CS101, CS102', 'Project A, Project B', 'Additional details here')
-    """)
+        INSERT OR IGNORE INTO user_profiles (
+            name, email, phone_number, linkedin_url, github_url, classes_taken, 
+            projects_worked_on, additional_info
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """,  (popup.entries["Full Name:"].get(), popup.entries["Email:"].get(),
+           popup.entries["Phone Number:"].get(), popup.entries["LinkedIn URL:"].get(),
+           popup.entries["GitHub URL:"].get(), popup.entries["Classes Taken:"].get(),
+           popup.entries["Projects Worked On:"].get(),
+           popup.entries["Additional Information:"].get()
+           ))
+
     db_conn.commit()
 
     return popup
@@ -96,23 +105,23 @@ def test_load_user_profile(create_mock_db):
     """)
     user_profile = cursor.fetchone()
 
-    # Assume we have a method to load user data based on selection
-    # Manually populate UI fields based on the result of the query
-    popup.entries["Full Name:"].insert(0, user_profile[1])
-    popup.entries["Email:"].insert(0, user_profile[2])
-    popup.entries["Phone Number:"].insert(0, user_profile[3])
-    popup.entries["LinkedIn URL:"].insert(0, user_profile[4])
-    popup.entries["GitHub URL:"].insert(0, user_profile[5])
-    popup.entries["Classes Taken:"].insert("1.0", user_profile[6])
-    popup.entries["Projects Worked On:"].insert("1.0", user_profile[7])
-    popup.entries["Additional Information:"].insert("1.0", user_profile[8])
+    entry_id = 1
+    full_name = "Lenny Pepperbottom"
+    email = "Lenny_Pepperbottom@thatsprettyneat.com"
+    phone_number = "123-456-7890"
+    linkedin_url = "https://linkedin.com/lenny"
+    github_url = "https://github.com/lenny"
+    classes_taken = "Environmental Science 101, Foraging 302"
+    projects_worked_on = "Manhattan Project, Project How Neat is That"
+    additional_info = "Host of 'Neature Walk'"
 
     # Validate that UI fields contain expected data
-    assert popup.entries["Full Name:"].get() == "Alice Johnson"
-    assert popup.entries["Email:"].get() == "alice@example.com"
-    assert popup.entries["Phone Number:"].get() == "123-456-7890"
-    assert popup.entries["LinkedIn URL:"].get() == "https://linkedin.com/alice"
-    assert popup.entries["GitHub URL:"].get() == "https://github.com/alice"
-    assert popup.entries["Classes Taken:"].get() == "CS101, CS102"
-    assert popup.entries["Projects Worked On:"].get() == "Project A, Project B"
-    assert popup.entries["Additional Information:"].get() == "Additional details here"
+    assert user_profile[0] == entry_id
+    assert user_profile[1] == full_name
+    assert user_profile[2] == email
+    assert user_profile[3] == phone_number
+    assert user_profile[4] == linkedin_url
+    assert user_profile[5] == github_url
+    assert user_profile[6] == classes_taken
+    assert user_profile[7] == projects_worked_on
+    assert user_profile[8] == additional_info
