@@ -88,6 +88,4 @@ jobs:
       run: |      
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
-        pytest tests/test_job_search_database  # Run the tests specific to job_search_database
-      env:
-        API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable for tests
+        pytest tests/test_job_search_database 
