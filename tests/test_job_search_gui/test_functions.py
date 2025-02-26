@@ -10,19 +10,22 @@ from src.job_search_gui.user_attribute_pop_up import UserAttributePopup
 
 @pytest.fixture
 def setup_user_attribute_popup():
-    """Fixture to set up a Tkinter root and database connection."""
-    if os.environ.get('DISPLAY', '') == '':
-        # Mock Tk() to prevent actual GUI window creation in headless environments
-        mock_root = MagicMock(spec=tk.Tk)
-        mock_root.withdraw = MagicMock()  # Mock the withdraw method
-        mock_root.quit = MagicMock()  # Mock the quit method to prevent blocking event loop
-        # Mock the necessary `tk` attributes for proper initialization of UserAttributePopup
-        mock_root.tk = MagicMock()  # Mock the `tk` attribute
-        mock_root.children = {}  # Mock the `children` attribute
-        mock_root.master = None  # Mock the `master` attribute as None, or root
-        root = mock_root
-    else:
-        root = tk.Tk()  # Allow normal display if running locally
+    """Fixture to set up a mock root window if headless or allow a normal display
+    if running locally, create a database connection, then instantiate an instance
+    of the UserAttributePopup class and create """
+
+    # if os.environ.get('DISPLAY', '') == '':  # If no display
+    # Mock Tk() to prevent actual GUI window creation in headless environments
+    mock_root = MagicMock(spec=tk.Tk)
+    mock_root.withdraw = MagicMock()  # Mock the withdraw method
+    mock_root.quit = MagicMock()  # Mock the quit method to prevent blocking event loop
+    # Mock the necessary `tk` attributes for proper initialization of UserAttributePopup
+    mock_root.tk = MagicMock()  # Mock the `tk` attribute
+    mock_root.children = {}  # Mock the `children` attribute
+    mock_root.master = None  # Mock the `master` attribute as None, or root
+    root = mock_root
+    # else:
+    #     root = tk.Tk()  # Allow normal display if running locally
 
     db_conn = sqlite3.connect(":memory:")  # In-memory database
     popup = UserAttributePopup(root, db_conn)
@@ -59,6 +62,7 @@ def setup_user_attribute_popup():
 @pytest.fixture
 def create_mock_db(setup_user_attribute_popup):
     """Fixture to create a mock user_profiles table and insert sample data."""
+
     popup, db_conn = setup_user_attribute_popup
     cursor = db_conn.cursor()
     cursor.execute("""
@@ -96,6 +100,7 @@ def create_mock_db(setup_user_attribute_popup):
 
 def test_load_user_profile(create_mock_db):
     """Test that selecting an item loads the correct data into the UI fields."""
+
     popup = create_mock_db
 
     # Manually interact with the database to fetch the user profile
