@@ -3,7 +3,7 @@ A class to represent the main window of a job listing GUI
 """
 import tkinter as tk
 from src.job_search_gui.job_listing_pop_up_class import JobListingPopup
-from src.job_search_gui.user_attribute_pop_up import UserAttributePopup
+from src.job_search_gui.user_attribute_popup import UserAttributePopup
 
 
 class AppMainWindow(tk.Tk):

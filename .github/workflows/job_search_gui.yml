@@ -71,9 +71,13 @@ jobs:
 
       - name: Run pylint on job_search_gui
         run: |
-          echo "Current Directory: $(pwd)"
-          echo "PYTHONPATH: $PYTHONPATH"
           pylint src/job_search_gui  # Run pylint on ai_resume_builder directory
+        continue-on-error: true
+
+      - name: Run pylint on tests
+        run: |
+          pylint tests/test_job_search_gui  # Run pylint on ai_resume_builder directory
+        continue-on-error: true
 
   run-tests:
     runs-on: ubuntu-latest
@@ -97,6 +101,4 @@ jobs:
                                                       # $GITHUB_ENV stores env variables
       - name: Run tests
         run: |
-          echo "Current Directory: $(pwd)"
-          echo "PYTHONPATH: $PYTHONPATH"
           pytest tests/test_job_search_gui

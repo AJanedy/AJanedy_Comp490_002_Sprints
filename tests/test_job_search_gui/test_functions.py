@@ -1,20 +1,25 @@
-import os
+"""
+A module for testing essential job_search_gui functions
+"""
 from unittest.mock import MagicMock
 import pytest
 import sqlite3
 import tkinter as tk
 
 from src.job_search_gui.job_app_main_window_class import AppMainWindow
-from src.job_search_gui.user_attribute_pop_up import UserAttributePopup
+from src.job_search_gui.user_attribute_popup import UserAttributePopup
 
 
 @pytest.fixture
 def setup_user_attribute_popup():
-    """Fixture to set up a mock root window if headless or allow a normal display
+    """
+    Fixture to set up a mock root window if headless or allow a normal display
     if running locally, create a database connection, then instantiate an instance
-    of the UserAttributePopup class and create """
+    of the UserAttributePopup class and create
 
-    # if os.environ.get('DISPLAY', '') == '':  # If no display
+    Lines 22 - 34 written by Google Gemini
+    """
+
     # Mock Tk() to prevent actual GUI window creation in headless environments
     mock_root = MagicMock(spec=tk.Tk)
     mock_root.withdraw = MagicMock()  # Mock the withdraw method
@@ -24,8 +29,6 @@ def setup_user_attribute_popup():
     mock_root.children = {}  # Mock the `children` attribute
     mock_root.master = None  # Mock the `master` attribute as None, or root
     root = mock_root
-    # else:
-    #     root = tk.Tk()  # Allow normal display if running locally
 
     db_conn = sqlite3.connect(":memory:")  # In-memory database
     popup = UserAttributePopup(root, db_conn)
@@ -61,9 +64,15 @@ def setup_user_attribute_popup():
 
 @pytest.fixture
 def create_mock_db(setup_user_attribute_popup):
-    """Fixture to create a mock user_profiles table and insert sample data."""
+    """
+    Fixture to create a mock user_profiles table and insert sample data
+    into the table.  A mock UserAttributePopup is yielded from the
+    setup_user_attribute_popup fixture method, as well as a database
+    connection.  The yielded popup fixture contains a simulated set of
+    input values, which are then read out and inserted into the database.
+    """
 
-    popup, db_conn = setup_user_attribute_popup
+    user_attribute_popup, db_conn = setup_user_attribute_popup
     cursor = db_conn.cursor()
     cursor.execute("""
     CREATE TABLE user_profiles (
@@ -86,25 +95,29 @@ def create_mock_db(setup_user_attribute_popup):
             projects_worked_on, additional_info
         )
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (popup.entries["Full Name:"].get(), popup.entries["Email:"].get(),
-          popup.entries["Phone Number:"].get(), popup.entries["LinkedIn URL:"].get(),
-          popup.entries["GitHub URL:"].get(), popup.entries["Classes Taken:"].get(),
-          popup.entries["Projects Worked On:"].get(),
-          popup.entries["Additional Information:"].get()
+    """, (user_attribute_popup.entries["Full Name:"].get(), user_attribute_popup.entries["Email:"].get(),
+          user_attribute_popup.entries["Phone Number:"].get(), user_attribute_popup.entries["LinkedIn URL:"].get(),
+          user_attribute_popup.entries["GitHub URL:"].get(), user_attribute_popup.entries["Classes Taken:"].get(),
+          user_attribute_popup.entries["Projects Worked On:"].get(),
+          user_attribute_popup.entries["Additional Information:"].get()
           ))
 
     db_conn.commit()
 
-    return popup
+    return user_attribute_popup
 
 
 @pytest.fixture
 def setup_main_window():
-    """Fixture to set up a mock root window if headless or allow a normal display
-    if running locally, create a database connection, then instantiate an instance
-    of the UserAttributePopup class and create """
-
-    """Fixture to mock the main window with job listings."""
+    """
+    Fixture to mock the main window with a listbox populated with fixed,
+    known job listings.  The listbox.curselection is set to the first
+    available index of the listbox.  The mock window also contains a
+    mocked version of the AppMainWindow's on_job_selected() method, which
+    is what needs to be tested to determine the accuracy of data collection
+    and entry into the database.  When this method is called it returns
+    this mock window (and it's attributes) as an object.
+    """
     job_listings = {
         1: {"job_title": "Data Analyst", "location": "Raleigh, NC",
             "description": "A good job", "compensation": "$100k-$120k",
@@ -118,8 +131,8 @@ def setup_main_window():
     mock_window.job_listings = job_listings  # Mock job listings attribute
     mock_window.listbox = MagicMock(spec=tk.Listbox)  # Mock listbox
 
-    mock_window.listbox.insert = MagicMock(spec=tk.Listbox.insert)
-    mock_window.on_job_selected = MagicMock(spec=AppMainWindow.on_job_selected)
+    mock_window.listbox.insert = MagicMock(spec=tk.Listbox.insert)  # mock listbox.insert
+    mock_window.on_job_selected = MagicMock(spec=AppMainWindow.on_job_selected)  # mock on_job_selected()
 
     for _, job_info in job_listings.items():
         job_title = job_info['job_title']
@@ -133,15 +146,25 @@ def setup_main_window():
 
 
 def test_on_job_selected(setup_main_window):
-    mock_window = setup_main_window
+    """
+    Tests a MagicMock instance of the AppMainWindow class.  Specifically
+    testing the accuracy of the on_job_selected() method, which is designed
+    to retrieve the full data set associated with the job listing selected
+    by the user.
 
-    mock_window.on_job_selected()
+    :param setup_main_window:
+    """
+    mock_window = setup_main_window  # Create mock main window
+    mock_window.on_job_selected()  # Call on_job_selected()
 
+    # Make sure on_job_selected() was called
     mock_window.on_job_selected.assert_called_once()
 
+    # Get fixed curselection()
     selected_index = mock_window.listbox.curselection()
+    # Get corresponding job_listing id
     selected_job_id = list(mock_window.job_listings.keys())[selected_index[0]]
-
+    # Get job details of the selected job id
     job_details = mock_window.job_listings[selected_job_id]
 
     assert job_details == {"job_title": "Data Analyst", "location": "Raleigh, NC",
@@ -150,12 +173,23 @@ def test_on_job_selected(setup_main_window):
 
 
 def test_load_user_profile(create_mock_db):
-    """Test that selecting an item loads the correct data into the UI fields."""
+    """
+    A test method to check the accuracy of data entry into a database.
+    create_mock_db() is a fixture that calls setup_user_attrubute_popup(),
+    another fixture.  In those fixture methods, a mock UserAttrubutePopup is
+    instantiated, its fields are populated with fixed values, and those
+    values are then read into an SQL query, populating a user_profiles with
+    a singular entry based on those fixed values.  We then look for and attempt
+    to extract that data from the database, and compare the found values against
+    the known values to confirm accuracy of this process.
 
-    popup = create_mock_db
+    :param create_mock_db:
+    """
 
-    # Manually interact with the database to fetch the user profile
-    cursor = popup.db_conn.cursor()
+    user_profile_popup = create_mock_db
+
+    # Fetch the user profile if it was created
+    cursor = user_profile_popup.db_conn.cursor()
     cursor.execute("""
     SELECT * FROM user_profiles WHERE id = 1
     """)

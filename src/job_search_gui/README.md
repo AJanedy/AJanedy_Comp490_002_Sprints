@@ -42,6 +42,9 @@ the project root directory and run:
 export PYTHONPATH=$(pwd)/src
 pytest tests/
 
+IMPORTANT NOTE: LOCAL PYTEST FUNCTIONALITY NOT CURRENTLY WORKING, CAN RUN IN
+IDE AND ON GITHUB ACTIONS
+
 ===============================================================================
 
 Project passes all tests and requirements
