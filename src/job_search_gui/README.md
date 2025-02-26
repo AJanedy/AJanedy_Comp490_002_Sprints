@@ -5,7 +5,10 @@ February 2025
 
 To use this program, Python 3.9 or higher needs to be installed on your 
 machine.  Pytest is also required if you wish to run the test module
-locally.
+locally (Functionality currently unavailable, test in IDE virtual environment
+or test through GitHub actions).  If running on Linux, you may have to install
+tkinter as it is not included in the base installation for this operating
+system.
 
 ===============================================================================
 FOR WINDOWS
@@ -48,4 +51,3 @@ IDE AND ON GITHUB ACTIONS
 ===============================================================================
 
 Project passes all tests and requirements
-x
