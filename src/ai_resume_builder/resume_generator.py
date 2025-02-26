@@ -2,10 +2,12 @@
 Author: Andrew Janedy
 February 2025
 
-A program to access Google Generative AI for the purpose of automating
-resume construction.  The AI is given a predetermined prompt that
-includes a job posting, and is asked to build a resume for that job
-given the applicant's skills, education, and work experience.
+A program that utilizes Google Generative AI for the purpose of automating
+resume construction.  The AI is given a predefined prompt containing a job
+posting, an applicant's skills, education, and experience, and is asked to
+build a customized resume.
+
+This program requires an API key which is not included.
 """
 import os
 import google.generativeai as genai
