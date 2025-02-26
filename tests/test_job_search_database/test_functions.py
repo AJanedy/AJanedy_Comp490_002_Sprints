@@ -1,8 +1,8 @@
 """
 Test functions for job_seach_database
 """
-import json
 import os
+import json
 import sqlite3
 from contextlib import redirect_stdout
 from pathlib import Path

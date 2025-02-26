@@ -126,12 +126,4 @@ class UserAttributePopup(tk.Toplevel):
               ))
 
         self.db_conn.commit()
-
-        print(name)
-        print(email)
-        print(phone_number)
-        print(linkedin_url)
-        print(github_url)
-        print(classes_taken)
-        print(projects)
-        print(additional_info)
+        self.destroy()
