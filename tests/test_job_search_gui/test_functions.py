@@ -86,16 +86,67 @@ def create_mock_db(setup_user_attribute_popup):
             projects_worked_on, additional_info
         )
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """,  (popup.entries["Full Name:"].get(), popup.entries["Email:"].get(),
-           popup.entries["Phone Number:"].get(), popup.entries["LinkedIn URL:"].get(),
-           popup.entries["GitHub URL:"].get(), popup.entries["Classes Taken:"].get(),
-           popup.entries["Projects Worked On:"].get(),
-           popup.entries["Additional Information:"].get()
-           ))
+    """, (popup.entries["Full Name:"].get(), popup.entries["Email:"].get(),
+          popup.entries["Phone Number:"].get(), popup.entries["LinkedIn URL:"].get(),
+          popup.entries["GitHub URL:"].get(), popup.entries["Classes Taken:"].get(),
+          popup.entries["Projects Worked On:"].get(),
+          popup.entries["Additional Information:"].get()
+          ))
 
     db_conn.commit()
 
     return popup
+
+
+@pytest.fixture
+def setup_main_window():
+    """Fixture to set up a mock root window if headless or allow a normal display
+    if running locally, create a database connection, then instantiate an instance
+    of the UserAttributePopup class and create """
+
+    """Fixture to mock the main window with job listings."""
+    job_listings = {
+        1: {"job_title": "Data Analyst", "location": "Raleigh, NC",
+            "description": "A good job", "compensation": "$100k-$120k",
+            "date_posted": "1/21/25"},
+        2: {"job_title": "Code Scrubber", "location": "Hell, Michigan",
+            "description": "A bad job", "compensation": "$40k-$60k",
+            "date_posted": "3/18/22"}
+    }
+
+    mock_window = MagicMock(spec=AppMainWindow)  # Mock main window
+    mock_window.job_listings = job_listings  # Mock job listings attribute
+    mock_window.listbox = MagicMock(spec=tk.Listbox)  # Mock listbox
+
+    mock_window.listbox.insert = MagicMock(spec=tk.Listbox.insert)
+    mock_window.on_job_selected = MagicMock(spec=AppMainWindow.on_job_selected)
+
+    for _, job_info in job_listings.items():
+        job_title = job_info['job_title']
+        location = job_info['location']
+        formatted_string = f"{job_title}: {location}"
+        mock_window.listbox.insert(tk.END, formatted_string)
+
+    mock_window.listbox.curselection.return_value = (0,)
+
+    return mock_window
+
+
+def test_on_job_selected(setup_main_window):
+    mock_window = setup_main_window
+
+    mock_window.on_job_selected()
+
+    mock_window.on_job_selected.assert_called_once()
+
+    selected_index = mock_window.listbox.curselection()
+    selected_job_id = list(mock_window.job_listings.keys())[selected_index[0]]
+
+    job_details = mock_window.job_listings[selected_job_id]
+
+    assert job_details == {"job_title": "Data Analyst", "location": "Raleigh, NC",
+                           "description": "A good job", "compensation": "$100k-$120k",
+                           "date_posted": "1/21/25"}
 
 
 def test_load_user_profile(create_mock_db):

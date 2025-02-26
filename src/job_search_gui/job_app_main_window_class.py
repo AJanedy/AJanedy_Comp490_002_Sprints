@@ -77,10 +77,9 @@ class AppMainWindow(tk.Tk):
         for _, job_info in self.job_listings.items():
             job_title = job_info['job_title']
             location = job_info['location']
-
             formatted_string = f"{job_title}: {location}"
-
             self.listbox.insert(tk.END, formatted_string)
+
         self.listbox.pack(fill=tk.BOTH, expand=True, padx=10, pady=(5, 0))
 
     def navigate(self, event):
