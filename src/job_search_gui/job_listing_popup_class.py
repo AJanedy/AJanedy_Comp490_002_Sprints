@@ -104,7 +104,8 @@ class JobListingPopup(tk.Toplevel):
         button_frame.pack(side=tk.BOTTOM, pady=10)  # Pack at the bottom with spacing
 
         # Button to select a user profile
-        self.profile_button = tk.Button(button_frame, text="Select User Profile", command=self.select_profile)
+        self.profile_button = tk.Button(button_frame, text="Select User Profile",
+                                        command=self.select_profile)
         self.profile_button.pack(side=tk.LEFT, padx=10, pady=(0, 0))
 
         # Button to close the pop-up window

@@ -1,3 +1,10 @@
+"""
+This module defines the ProfileSelectioPopup class to display a list of
+previously submitted user profiles.  After selection of a profile, the user
+can choose to generate a resume and cover letter based on the previously
+selected job listing, and the selected profile.
+"""
+
 import tkinter as tk
 from src.job_search_gui.generate_resume_and_cover_letter import generate_resume_and_cover_letter
 
@@ -6,9 +13,9 @@ class ProfileSelectionPopup(tk.Toplevel):
     """
     A popup window to allow users to select a profile from the database.
 
-    Attributes:
-        - parent: The parent Tkinter window
-        - callback: A function to handle the selected profile
+    Key Attributes:
+        - parent: The parent window is the job_listing_popup window
+        - db_conn: The database connection
         - listbox: A Tkinter Listbox widget to display profiles
 
     Methods:
@@ -36,7 +43,8 @@ class ProfileSelectionPopup(tk.Toplevel):
         self.listbox.pack(padx=20, pady=10, fill=tk.BOTH, expand=True)
 
         # Select button
-        select_button = tk.Button(self, text="Create Resume and Cover Letter", command=self.on_select)
+        select_button = tk.Button(self, text="Create Resume and Cover Letter",
+                                  command=self.on_select)
         select_button.pack(pady=5)
 
         # Fetch and display profiles

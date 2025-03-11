@@ -26,6 +26,11 @@ ROOT_DATABASE_PATH = os.path.join(ROOT_DIRECTORY, DATA_BASE_PATH)
 
 
 def main():
+    """
+    Program entry.  Establish a database connection, retrieve all job listings
+    from the database, open the job_search_gui main window and display every
+    job listing
+    """
     # Establish database connection
     database_connection = create_database_connection(ROOT_DATABASE_PATH)
 
