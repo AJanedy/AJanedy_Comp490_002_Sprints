@@ -1,3 +1,14 @@
+"""
+The module defines the JobListingPopup class.  The class creates a popup window
+that displays all available information regarding a job posting in a database
+of job listings.
+
+The popup also allows a user to select a user profile from a list of previously
+submitted profiles that can then be used in combination with the job information
+to make a request to Google Gemini AI to create a resume and cover letter
+specifically designed for that job.
+"""
+
 import tkinter as tk
 from src.job_search_gui.profile_selection_popup_class import ProfileSelectionPopup
 
@@ -29,7 +40,7 @@ class JobListingPopup(tk.Toplevel):
         self.title(f"Job Listing Details for {self.job_info['job_title']}")
         self.create_label()
         self.frame = self.create_frame()
-        self.text_widget = (tk.Text(self.frame, wrap=tk.WORD, width=70, height=20))
+        self.text_widget = tk.Text(self.frame, wrap=tk.WORD, width=70, height=20)
         self.create_text_widget()
 
     def create_text_widget(self):
@@ -71,7 +82,8 @@ class JobListingPopup(tk.Toplevel):
         button_frame.pack(side=tk.BOTTOM, pady=10)
 
         # Button to select a user profile
-        profile_button = tk.Button(button_frame, text="Select User Profile", command=self.select_profile)
+        profile_button = tk.Button(button_frame, text="Select User Profile",
+                                   command=self.select_profile)
         profile_button.pack(side=tk.LEFT, padx=10, pady=(0, 0))
 
         # Button to close the pop-up window
