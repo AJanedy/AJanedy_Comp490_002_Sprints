@@ -108,6 +108,7 @@ def create_user_profile_table(cursor: Cursor):
             CREATE TABLE IF NOT EXISTS user_profiles (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT,
+                profile_name TEXT,
                 email TEXT,
                 phone_number TEXT,
                 linkedin_url TEXT,

@@ -60,12 +60,25 @@ def write_to_file(filename, resume):
 def get_api_key():
     """
     A method to extract an API key either from the environment variable (used
-    for GitHub actions) or from a provided file
-    :return:
+    for GitHub actions) or from a provided file.  If the file does not exist
+    or is empty, the user is asked for the API key, and it is added into the file
+    for future runs.
+
+    :return: api_key
     """
+
+    api_key_file = files["API_KEY"]
     api_key = os.environ.get("API_KEY")  # Get API key from environment variable
+
     if not api_key:  # If API_KEY is not an environment variable
-        api_key = read_file(files["API_KEY"])
+        # If api_key.txt does not exist or is empty
+        if not os.path.exists(api_key_file) or os.path.getsize(api_key_file) == 0:
+            with open(api_key_file, 'w', encoding="utf-8") as file:
+                api_key = input("Enter your api key: ")
+                file.write(api_key)
+        else:
+            api_key = read_file(api_key_file)
+
     return api_key
 
 

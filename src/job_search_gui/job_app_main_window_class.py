@@ -115,7 +115,7 @@ class AppMainWindow(tk.Tk):
             job_id = list(self.job_listings.keys())[selected_index[0]]
             job_info = self.job_listings[job_id]
             # Open a pop-up window for the selected job
-            JobListingPopup(self, job_info)
+            JobListingPopup(self, job_info, self.db_conn)
 
     def on_tab_pressed(self, _):
         """

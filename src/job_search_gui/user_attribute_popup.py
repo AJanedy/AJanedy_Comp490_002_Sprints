@@ -46,6 +46,7 @@ class UserAttributePopup(tk.Toplevel):
         """Creates labeled input fields for user attributes."""
         fields = [
             ("Full Name:", 40),
+            ("Profile Name:", 40),
             ("Email:", 40),
             ("Phone Number:", 40),
             ("LinkedIn URL:", 40),
@@ -107,6 +108,7 @@ class UserAttributePopup(tk.Toplevel):
         cursor = self.db_conn.cursor()
 
         name = self.entries["Full Name:"].get()
+        profile_name = self.entries["Profile Name:"].get()
         email = self.entries["Email:"].get()
         phone_number = self.entries["Phone Number:"].get()
         linkedin_url = self.entries["LinkedIn URL:"].get()
@@ -117,11 +119,11 @@ class UserAttributePopup(tk.Toplevel):
 
         cursor.execute("""
         INSERT OR IGNORE INTO user_profiles(
-            name, email, phone_number, linkedin_url, 
+            name, profile_name, email, phone_number, linkedin_url, 
             github_url, classes_taken, projects_worked_on, additional_info
         )
-        values (?, ?, ?, ?, ?, ?, ?, ?)
-        """, (name, email, phone_number, linkedin_url, github_url,
+        values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (name, profile_name, email, phone_number, linkedin_url, github_url,
               classes_taken, projects, additional_info
               ))
 
