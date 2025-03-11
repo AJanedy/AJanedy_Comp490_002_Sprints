@@ -36,7 +36,6 @@ from each json file.  This process begins with the populate_database()
 method found in database_management.py.
 """
 import os
-import sys
 
 from src.job_search_database.database_management import create_database, populate_database
 from src.job_search_database.file_management import normalize_file
@@ -85,7 +84,10 @@ def launch_job_database():
     populate_database(MODULE_DATABASE_PATH, normalized_files)
 
 
-if __name__ == "__main__":
+def main():
     launch_job_database()
     create_symlink_database_in_root()
 
+
+if __name__ == "__main__":
+    main()

@@ -6,7 +6,7 @@ JobListingPopUp is a Toplevel window that provides a detailed description of
 a selected job listing.
 """
 import tkinter as tk
-from profile_selection_popup import ProfileSelectionPopup
+from src.job_search_gui.profile_selection_popup_class import ProfileSelectionPopup
 
 
 class JobListingPopup(tk.Toplevel):
@@ -91,8 +91,7 @@ class JobListingPopup(tk.Toplevel):
         Opens the profile selection popup and receives the selected profile.
         """
 
-        ProfileSelectionPopup(self, self.db_conn, self.relevant_job_info,
-                              self.job_title, self.company)
+        ProfileSelectionPopup(self)
 
     def create_buttons(self):
         """

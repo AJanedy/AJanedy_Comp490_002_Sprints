@@ -1,5 +1,5 @@
 import tkinter as tk
-from generate_resume_and_cover_letter import generate_resume_and_cover_letter
+from src.job_search_gui.generate_resume_and_cover_letter import generate_resume_and_cover_letter
 
 
 class ProfileSelectionPopup(tk.Toplevel):
@@ -16,16 +16,16 @@ class ProfileSelectionPopup(tk.Toplevel):
         - on_select: Handles profile selection and closes the popup
     """
 
-    def __init__(self, parent, database_connection, relevant_job_info,
-                 company, job_title):
+    def __init__(self, parent):
         super().__init__(parent)
         self.title("Select a Profile")
         self.geometry("400x300")
-        self.db_conn = database_connection
-        self.relevant_job_info = relevant_job_info
-        self.company = company
-        self.job_title = job_title
-        self.chosen_profile = None
+        self.db_conn = parent.db_conn
+        self.relevant_job_info = parent.relevant_job_info
+        self.company = parent.company
+        self.job_title = parent.job_title
+        self.user_profile = None
+        self.profile_name = None
 
         # Label
         label = tk.Label(self, text="Select a Profile:")
@@ -66,7 +66,7 @@ class ProfileSelectionPopup(tk.Toplevel):
         raw_profile = cursor.fetchall()
         raw_profile = raw_profile[0]
 
-        self.chosen_profile = (f"Name: {raw_profile[1]}\n"
+        self.user_profile = (f"Name: {raw_profile[1]}\n"
                                f"Email: {raw_profile[3]}\n"
                                f"Phone Number: {raw_profile[4]}\n"
                                f"LinkedIn: {raw_profile[5]}\n"
@@ -75,6 +75,6 @@ class ProfileSelectionPopup(tk.Toplevel):
                                f"Projects Worked On: {raw_profile[8]}\n"
                                f"Additional Info: {raw_profile[9]}")
 
-        profile_name = raw_profile[2]
+        self.profile_name = raw_profile[2]
 
-        generate_resume_and_cover_letter(self.chosen_profile, self.relevant_job_info, profile_name, self)
+        generate_resume_and_cover_letter(self)

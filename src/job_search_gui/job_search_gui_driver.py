@@ -25,8 +25,7 @@ ROOT_DIRECTORY = os.path.abspath(os.path.join(SCRIPT_DIRECTORY, "../../"))
 ROOT_DATABASE_PATH = os.path.join(ROOT_DIRECTORY, DATA_BASE_PATH)
 
 
-if __name__ == "__main__":
-
+def main():
     # Establish database connection
     database_connection = create_database_connection(ROOT_DATABASE_PATH)
 
@@ -36,3 +35,7 @@ if __name__ == "__main__":
     # Launch the GUI and display all job listings
     app = AppMainWindow(database_connection, job_listings)
     app.mainloop()
+
+
+if __name__ == "__main__":
+    main()
