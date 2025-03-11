@@ -17,9 +17,9 @@ Key Methods:
       format, then saves the PDF to resume_and_cover_letters.
 """
 
-import google.generativeai as genai
 import os
 import re
+import google.generativeai as genai
 import markdown
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
