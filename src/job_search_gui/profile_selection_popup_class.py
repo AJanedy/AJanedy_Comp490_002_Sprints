@@ -29,8 +29,8 @@ class ProfileSelectionPopup(tk.Toplevel):
         self.geometry("400x300")
         self.db_conn = parent.db_conn
         self.relevant_job_info = parent.relevant_job_info
-        self.company = parent.company
-        self.job_title = parent.job_title
+        self.company = parent.job_info['company']
+        self.job_title = parent.job_info['job_title']
         self.user_profile = None
         self.profile_name = None
 
