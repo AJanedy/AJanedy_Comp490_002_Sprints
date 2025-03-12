@@ -229,6 +229,6 @@ jobs:                        # Creates a job
       run: |      
         echo "Current Directory: $(pwd)"
         echo "PYTHONPATH: $PYTHONPATH"
-        pytest tests
+        pytest tests -s
       env:
         API_KEY: ${{ secrets.API_KEY }}  # Set API key to environment variable for tests
