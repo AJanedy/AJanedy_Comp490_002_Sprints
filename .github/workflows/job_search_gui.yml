@@ -101,4 +101,4 @@ jobs:
                                                       # $GITHUB_ENV stores env variables
       - name: Run tests
         run: |
-          pytest tests/test_job_search_gui
+          pytest tests/test_job_search_gui -s

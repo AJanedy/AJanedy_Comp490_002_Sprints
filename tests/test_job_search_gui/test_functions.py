@@ -244,27 +244,30 @@ def test_get_api_key():
 
     api_key = "5jl6fsLKD45jnJ43pds56Jmi"
 
-    with open(absolute_api_key_path, 'w', encoding="utf-8") as file:
-        file.write(api_key)  # Write api key to file
+    # Remove API_KEY environment variable
+    with patch.dict(os.environ, {"API_KEY": ""}):
+        
+        with open(absolute_api_key_path, 'w', encoding="utf-8") as file:
+            file.write(api_key)  # Write api key to file
 
-    retrieved_api_key = get_api_key()  # Get api key from file
+        retrieved_api_key = get_api_key()  # Get api key from file
 
-    assert api_key == retrieved_api_key
+        assert api_key == retrieved_api_key
 
-    delete_api_key(absolute_api_key_path)
+        delete_api_key(absolute_api_key_path)
 
-    # Simulate user input of a valid api key and test that get_api_key() returns it
-    with patch('builtins.input', return_value='5jl6fsLKD45jnJ43pds56Jmi'):
-        api_key = get_api_key()
-        assert api_key == '5jl6fsLKD45jnJ43pds56Jmi'
+        # Simulate user input of a valid api key and test that get_api_key() returns it
+        with patch('builtins.input', return_value='5jl6fsLKD45jnJ43pds56Jmi'):
+            api_key = get_api_key()
+            assert api_key == '5jl6fsLKD45jnJ43pds56Jmi'
 
-    delete_api_key(absolute_api_key_path)
+        delete_api_key(absolute_api_key_path)
 
-    # Simulate an API_KEY environment variable and ensure that get_api_key()
-    # finds and returns it
-    with patch.dict(os.environ, {'API_KEY': '5jl6fsLKD45jnJ43pds56Jmi'}):
-        api_key = get_api_key()
-        assert api_key == '5jl6fsLKD45jnJ43pds56Jmi'
+        # Simulate an API_KEY environment variable and ensure that get_api_key()
+        # finds and returns it
+        with patch.dict(os.environ, {'API_KEY': '5jl6fsLKD45jnJ43pds56Jmi'}):
+            api_key = get_api_key()
+            assert api_key == '5jl6fsLKD45jnJ43pds56Jmi'
 
 
 def delete_api_key(absolute_api_key_path):
