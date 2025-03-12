@@ -6,7 +6,7 @@ selected job listing, and the selected profile.
 """
 
 import tkinter as tk
-from src.job_search_gui.generate_resume_and_cover_letter import generate_resume_and_cover_letter
+from src.job_search_gui.generate_resume_and_cover_letter import generate_documents
 
 
 class ProfileSelectionPopup(tk.Toplevel):
@@ -34,7 +34,7 @@ class ProfileSelectionPopup(tk.Toplevel):
         self.user_profile = None
         self.profile_name = None
 
-        # Label
+        # Popup window label
         label = tk.Label(self, text="Select a Profile:")
         label.pack(pady=10)
 
@@ -42,10 +42,10 @@ class ProfileSelectionPopup(tk.Toplevel):
         self.listbox = tk.Listbox(self)
         self.listbox.pack(padx=20, pady=10, fill=tk.BOTH, expand=True)
 
-        # Select button
+        # A button representing the final query to create a custom resume and cover letter
         select_button = tk.Button(self, text="Create Resume and Cover Letter",
                                   command=self.on_select)
-        select_button.pack(pady=5)
+        select_button.pack(pady=5)  # Button padding
 
         # Fetch and display profiles
         self.fetch_profiles()
@@ -56,33 +56,37 @@ class ProfileSelectionPopup(tk.Toplevel):
         """
 
         cursor = self.db_conn.cursor()
-        cursor.execute("SELECT * FROM user_profiles")  # Assuming table 'user_profiles' exists
+        cursor.execute("SELECT profile_name FROM user_profiles")  # Get all user profiles from database
         profiles = cursor.fetchall()
 
-        # Insert profiles into the listbox
+        # Insert profile names (identifier) into the listbox
         for profile in profiles:
-            self.listbox.insert(tk.END, profile[2])
+            self.listbox.insert(tk.END, *profile)
 
     def on_select(self):
         """
-        Retrieves the selected profile and passes it to the callback function.
+        Retrieves the data associated with the selected profile, formats that
+        information into a structured string, assigns it to the class attribute
+        user_profile, then calls generate_documents to have Google Gemini AI
+        use the job listing and the user profile to create targeted resume
+        and cover letter
         """
-        selected_profile = self.listbox.get(tk.ACTIVE)
+        selected_profile = self.listbox.get(tk.ACTIVE)  # Retrieve the selected item (job listing)
         cursor = self.db_conn.cursor()
         cursor.execute("SELECT * FROM user_profiles WHERE profile_name = ?", (selected_profile,))
 
-        raw_profile = cursor.fetchall()
-        raw_profile = raw_profile[0]
+        profile = cursor.fetchall()
+        profile = profile[0]
 
-        self.user_profile = (f"Name: {raw_profile[1]}\n"
-                               f"Email: {raw_profile[3]}\n"
-                               f"Phone Number: {raw_profile[4]}\n"
-                               f"LinkedIn: {raw_profile[5]}\n"
-                               f"GitHub: {raw_profile[6]}\n"
-                               f"Classes Taken: {raw_profile[7]}\n"
-                               f"Projects Worked On: {raw_profile[8]}\n"
-                               f"Additional Info: {raw_profile[9]}")
+        self.user_profile = (f"Name: {profile[1]}\n"
+                               f"Email: {profile[3]}\n"
+                               f"Phone Number: {profile[4]}\n"
+                               f"LinkedIn: {profile[5]}\n"
+                               f"GitHub: {profile[6]}\n"
+                               f"Classes Taken: {profile[7]}\n"
+                               f"Projects Worked On: {profile[8]}\n"
+                               f"Additional Info: {profile[9]}")
 
-        self.profile_name = raw_profile[2]
+        self.profile_name = profile[2]
 
-        generate_resume_and_cover_letter(self)
+        generate_documents(self)

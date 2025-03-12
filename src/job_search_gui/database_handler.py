@@ -17,9 +17,11 @@ def create_database_connection(database_path: str):
 
 def get_jobs_from_database(database_connection: Connection):
     """
-    Get job_titles and their ids to display to the main window
+    A method to execute an SQL query to retrieve all job listings
+    and associated data from the job_listings database.
+
     :param database_connection:
-    :return:
+    :return job_listings:
     """
     cursor = database_connection.cursor()
     cursor.execute("""

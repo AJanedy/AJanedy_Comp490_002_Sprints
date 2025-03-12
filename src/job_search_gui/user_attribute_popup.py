@@ -19,13 +19,12 @@ class UserAttributePopup(tk.Toplevel):
     LinkedIn and GitHub URLs, courses taken, applicable projects,
     and other relevant information.
 
-    Attributes:
+    Key Attributes:
         - db_conn: A database connection object
         - entries: A dictionary mapping the GUI input labels to the
             input given by the user.
 
-    Methods:
-        - __init__(parent, database_connection): Initializes the popup
+    Key Methods:
         - create_input_fields(): Creates the labeled entry fields for the
             user to enter attributes.
         - create_text_area(label_text): Used to create multiple, multi-line
@@ -43,7 +42,8 @@ class UserAttributePopup(tk.Toplevel):
         self.create_input_fields()
 
     def create_input_fields(self):
-        """Creates labeled input fields for user attributes."""
+        """ Creates labeled input fields for user attributes. """
+
         fields = [
             ("Full Name:", 40),
             ("Profile Name:", 40),
@@ -53,15 +53,19 @@ class UserAttributePopup(tk.Toplevel):
             ("GitHub URL:", 40)
         ]
 
-        self.entries = {}
+        self.entries = {}  # A dictionary to hold user entries
 
         for label_text, width in fields:
-            frame = tk.Frame(self)
+            frame = tk.Frame(self)  # Create Frame widget.
+            # Stretch frame to fit window with padding
             frame.pack(fill=tk.X, padx=10, pady=2)
 
+            # Create a label for each field in the frame, align left
             label = tk.Label(frame, text=label_text, width=20, anchor="w")
             label.pack(side=tk.LEFT)
 
+            # Creates an entry widget, aligns it to the right of the frame,
+            # and saves the user entry to the self.entries dictionary
             entry = tk.Entry(frame, width=width)
             entry.pack(side=tk.RIGHT, expand=True)
             self.entries[label_text] = entry
@@ -72,16 +76,20 @@ class UserAttributePopup(tk.Toplevel):
         self.create_text_area("Additional Information:")
 
     def create_text_area(self, label_text):
-        """Creates a labeled text widget with a scrollbar."""
-        frame = tk.Frame(self)
+        """ Creates a labeled text widget. """
+
+        frame = tk.Frame(self)  # Create a frame widget
+        # Stretch the frame to fit the window with padding
         frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
 
+        # Create a label for each field in the frame, align left
         label = tk.Label(frame, text=label_text, anchor="w")
         label.pack(anchor="w")
 
+        # Create a multiline text box that fills the frame and saves
+        # the user entry to the self.entries dictionary
         text_widget = tk.Text(frame, wrap=tk.WORD, height=5)
         text_widget.pack(fill=tk.BOTH, expand=True)
-
         self.entries[label_text] = text_widget
 
     def create_buttons(self):

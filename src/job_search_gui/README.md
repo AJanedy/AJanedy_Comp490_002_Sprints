@@ -50,4 +50,4 @@ IDE AND ON GITHUB ACTIONS
 
 ===============================================================================
 
-Project passes all tests and requirements
+~~Project passes all tests and requirements~~

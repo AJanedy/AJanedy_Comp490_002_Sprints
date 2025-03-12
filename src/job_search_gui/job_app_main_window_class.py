@@ -13,21 +13,14 @@ class AppMainWindow(tk.Tk):
     and their location retrieved from a database connection.  It also contains
     functionalities for sorting job listings and closing the application.
 
-    Attributes:
+    Key Attributes:
         - database_connection: A database connection object used to retrieve job listings.
         - job_listings (list): A list of job listings, each being represented by a
             dictionary containing job info.
-        - sort_by_location_button (tk.Button): A button to sort job listings by location
-        - sort_by_name_button (tk.Button): A button to sort job listings by name
-        - close_button (tk.Button): A button to close the window
-        - listbox (tk.Listbox): A listbox to display the job listings
 
-    Methods:
-        - __init__(database_connection, job_listings): Initialize the window, populated the
-            listbox, create sort and close buttons.
+    Key Methods:
         - populate_listbox(): Populates the lisbox with jobs from the 'job_listings' list
             attribute.
-        - create_buttons(): Creates buttons for sorting as well as the close button
         - event_handler(): Registers event handlers (buttons clicks, listbox selection, etc.).
     """
 
@@ -58,9 +51,8 @@ class AppMainWindow(tk.Tk):
             - "<Up>" and "<Down>": Allows navigation through the listbox
         """
         # Bind event for when an item is selected
-        self.listbox.bind("<<ListboxSelect>>", self.on_job_selected)
+        self.listbox.bind("<Double-Button-1>", self.on_job_selected)
         self.listbox.bind("<Return>", self.on_job_selected)
-        self.listbox.bind("<Tab>", self.on_tab_pressed)
         self.listbox.bind("<Up>", self.navigate)
         self.listbox.bind("<Down>", self.navigate)
 
@@ -116,29 +108,6 @@ class AppMainWindow(tk.Tk):
             job_info = self.job_listings[job_id]
             # Open a pop-up window for the selected job
             JobListingPopup(self, job_info, self.db_conn)
-
-    def on_tab_pressed(self, _):
-        """
-        A method to navigate through actionable parts of the main window. Tab
-        will cycle through the listbox as well as each button in the button
-        frame.  Shift-tab will cycle through those items in reverse.
-        """
-        # Move the focus to the next item in the Listbox when Tab is pressed
-        current_selection = self.listbox.curselection()
-        if not current_selection:
-            # If nothing is selected, select the first item
-            self.listbox.activate(0)
-            self.listbox.select_set(0)
-        else:
-            # Move selection to the next item and wrap around at the end
-            next_index = (current_selection[0] + 1) % len(self.job_listings)
-            self.listbox.select_clear(0, tk.END)  # Clear all selections
-            self.listbox.select_set(next_index)  # Set the next item as selected
-            self.listbox.activate(next_index)
-
-            self.listbox.see(next_index)
-
-        self.listbox.focus_set()
 
     def create_buttons(self):
         """

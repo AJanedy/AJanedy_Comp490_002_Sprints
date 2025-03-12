@@ -25,6 +25,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from src.ai_resume_builder.resume_generator import get_api_key
 
+
 # ...\AJanedy_Comp490_002_Sprints\src\job_search_gui
 script_directory = os.path.dirname(os.path.abspath(__file__))
 # \AJanedy_Comp490_002_Sprints\src\ai_resume_builder\resumes_and_cover_letters
@@ -41,14 +42,13 @@ BOTTOM_MARGIN = 50  # Margin before starting a new page
 MAX_WIDTH = 520  # Max text width before wrapping
 
 
-def generate_resume_and_cover_letter(parent):
+def generate_documents(parent):
     """
     Generates a resume and cover letter based on the user's chosen profile
     and the selected job listing.  A PDF is then created for each of those
     generated documents and saved to resumes_and_cover_letters.
 
     :param parent:
-    :return:
     """
     # Make the directory if it does not exist
     if not os.path.exists(resume_and_cover_letter_directory):

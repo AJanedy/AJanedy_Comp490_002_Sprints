@@ -1,6 +1,6 @@
 """
 The module defines the JobListingPopup class.  The class creates a popup window
-that displays all available information regarding a job posting in a database
+that displays all available information regarding a chosen job posting in a database
 of job listings.
 
 The popup also allows a user to select a user profile from a list of previously
@@ -22,13 +22,11 @@ class JobListingPopup(tk.Toplevel):
         - job_info: A dictionary containing job details.
         - db_conn: Database connection to fetch related data.
 
-    Methods:
-        - __init__(parent, job_info): Initializes the window with job info
-        - create_buttons: Creates buttons for profile selection and closing the window
-        - create_label: Creates a label to display the job title
-        - create_frame: Creates a frame to hold the text widget
-        - create_text_widget: Creates a text widget populated with job details
-        - select_profile: Instantiates an instance of ProfileSelectionPopup
+    Key Methods:
+        - create_buttons: Creates buttons for profile selection and closing the window.
+        - select_profile: Instantiates an instance of ProfileSelectionPopup.
+        - get_all_job_info: Gets all associated attributes of a given job listing.
+        - get_relevant_info: Gets specific info relevant for creating targeted resumes.
     """
 
     def __init__(self, parent, job_info, database_connection):

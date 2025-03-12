@@ -1,5 +1,5 @@
 Author: Andrew Janedy
-February 2025
+March 2025
 
 ===============================================================================
 
@@ -18,7 +18,7 @@ to the root directory:
 
 then run:
 
-    python src\job_search_database\job_search_database.py
+    python src\targeted_ai_resume\targeted_ai_resume.py
 
 ===============================================================================
 FOR LINUX
@@ -30,7 +30,7 @@ To run program in linux shell, navigate to the root directory of the project
 
 then run:
 
-    python3 src/job_search_database/job_search_database.py
+    python3 src/targeted_ai_resume/targeted_ai_resume.py
 
 ===============================================================================
 
@@ -40,7 +40,7 @@ the project root directory and run:
 export PYTHONPATH=$(pwd)/src
 pytest tests/
 
-### THIS FUNCTIONALITY IS CURRENTLY NOT WORKING ###
+### THIS FUNCTIONALITY IS NOT CURRENTLY WORKING ###
 
 ===============================================================================
 
