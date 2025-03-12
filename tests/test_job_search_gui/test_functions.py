@@ -229,10 +229,10 @@ def test_get_api_key():
     Testing get_api_key in ai_resume_builder/resume_generator.py.
 
     1st assert tests to ensure get_api_key() properly extracts the api key
-        from the api_key.txt file
+        from simulated user input
 
-    2nd assert tests to ensure get_api_key() asks the user for an api key
-        if the api_key.txt file is empty
+    2nd assert tests to ensure get_api_key() properly gets the api key from
+        api_key.txt 
 
     3rd assert tests to ensure that the api key is retrieved from the
         environment variable API_KEY if it exists.  This is used for GitHub
@@ -249,19 +249,20 @@ def test_get_api_key():
 
         # Simulate user input of a valid api key and test that get_api_key() returns it
         with patch('builtins.input', return_value='5jl6fsLKD45jnJ43pds56Jmi'):
-            api_key = get_api_key()
+
+            api_key = get_api_key()  # Retrieve from user input
             assert api_key == '5jl6fsLKD45jnJ43pds56Jmi'
 
-            with open(absolute_api_key_path, 'w', encoding="utf-8") as file:
-                file.write(api_key)  # Write api key to file
-
-            retrieved_api_key = get_api_key()  # Get api key from file
-
-            assert api_key == retrieved_api_key
-
             delete_api_key(absolute_api_key_path)
 
-            delete_api_key(absolute_api_key_path)
+        with open(absolute_api_key_path, 'w', encoding="utf-8") as file:
+            file.write(api_key)  # Write api key to file
+
+        retrieved_api_key = get_api_key()  # Get api key from file
+
+        assert api_key == retrieved_api_key
+
+        delete_api_key(absolute_api_key_path)
 
         # Simulate an API_KEY environment variable and ensure that get_api_key()
         # finds and returns it
