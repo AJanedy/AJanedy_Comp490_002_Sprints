@@ -1,13 +1,20 @@
 """
 A module for testing essential job_search_gui functions
 """
-from unittest.mock import MagicMock
+import os.path
+from unittest.mock import MagicMock, patch
 import pytest
 import sqlite3
 import tkinter as tk
+from pathlib import Path
+import google.generativeai as genai
 
 from src.job_search_gui.job_app_main_window_class import AppMainWindow
 from src.job_search_gui.user_attribute_popup import UserAttributePopup
+from src.ai_resume_builder.resume_generator import get_api_key
+
+SCRIPT_DIRECTORY = Path(__file__).resolve().parent
+ROOT_DIRECTORY = SCRIPT_DIRECTORY.parent.parent
 
 
 @pytest.fixture
@@ -215,3 +222,60 @@ def test_load_user_profile(create_mock_db):
     assert user_profile[6] == classes_taken
     assert user_profile[7] == projects_worked_on
     assert user_profile[8] == additional_info
+
+
+def test_get_api_key():
+    """
+    Testing get_api_key in ai_resume_builder/resume_generator.py.
+
+    1st assert tests to ensure get_api_key() properly extracts the api key
+        from the api_key.txt file
+
+    2nd assert tests to ensure get_api_key() asks the user for an api key
+        if the api_key.txt file is empty
+
+    3rd assert tests to ensure that the api key is retrieved from the
+        environment variable API_KEY if it exists.  This is used for GitHub
+        actions
+    """
+
+    relative_api_key_path = "src\\ai_resume_builder\\source_text_files\\api_key.txt"
+    absolute_api_key_path = os.path.join(ROOT_DIRECTORY, relative_api_key_path)
+
+    api_key = "5jl6fsLKD45jnJ43pds56Jmi"
+
+    with open(absolute_api_key_path, 'w', encoding="utf-8") as file:
+        file.write(api_key)  # Write api key to file
+
+    retrieved_api_key = get_api_key()  # Get api key from file
+
+    assert api_key == retrieved_api_key
+
+    delete_api_key(absolute_api_key_path)
+
+    # Simulate user input of a valid api key and test that get_api_key() returns it
+    with patch('builtins.input', return_value='5jl6fsLKD45jnJ43pds56Jmi'):
+        api_key = get_api_key()
+        assert api_key == '5jl6fsLKD45jnJ43pds56Jmi'
+
+    delete_api_key(absolute_api_key_path)
+
+    # Simulate an API_KEY environment variable and ensure that get_api_key()
+    # finds and returns it
+    with patch.dict(os.environ, {'API_KEY': '5jl6fsLKD45jnJ43pds56Jmi'}):
+        api_key = get_api_key()
+        assert api_key == '5jl6fsLKD45jnJ43pds56Jmi'
+
+
+def delete_api_key(absolute_api_key_path):
+    with open(absolute_api_key_path, 'w', encoding="utf-8") as file:
+        pass  # Remove api key from file
+    # Make sure file is empty
+    assert os.path.getsize(absolute_api_key_path) == 0
+
+
+
+
+
+
+
