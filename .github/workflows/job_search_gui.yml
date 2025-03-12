@@ -71,12 +71,12 @@ jobs:
 
       - name: Run pylint on job_search_gui
         run: |
-          pylint src/job_search_gui  # Run pylint on ai_resume_builder directory
+          pylint src/job_search_gui  # Run pylint on job_search_gui
         continue-on-error: true
 
       - name: Run pylint on tests
         run: |
-          pylint tests/test_job_search_gui  # Run pylint on ai_resume_builder directory
+          pylint tests/test_job_search_gui  # Run pylint on job_search_gui
         continue-on-error: true
 
   run-tests:

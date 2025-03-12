@@ -56,7 +56,7 @@ class ProfileSelectionPopup(tk.Toplevel):
         """
 
         cursor = self.db_conn.cursor()
-        cursor.execute("SELECT profile_name FROM user_profiles")  # Get all user profiles from database
+        cursor.execute("SELECT profile_name FROM user_profiles")
         profiles = cursor.fetchall()
 
         # Insert profile names (identifier) into the listbox
